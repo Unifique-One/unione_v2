@@ -230,6 +230,17 @@ body[data-page='login'],
 	padding: 30px !important;
 }
 
+/* Canonical login headline, centered inside the solid card. */
+#body-login [data-login-form-headline],
+#body-login .login-form__headline,
+#login [data-login-form-headline],
+#login .login-form__headline {
+	display: block !important;
+	width: 100% !important;
+	text-align: center !important;
+	color: var(--unifique-card-text) !important;
+}
+
 #body-login .guest-box::before,
 #login .guest-box::before {
 	content: '' !important;

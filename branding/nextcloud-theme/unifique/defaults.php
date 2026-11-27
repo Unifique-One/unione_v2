@@ -29,6 +29,10 @@ class OC_Theme {
 		return self::USER_HELP;
 	}
 
+	public function getSyncClientUrl() {
+		return self::SITE;
+	}
+
 	public function getTitle() {
 		return self::BRAND;
 	}
@@ -46,19 +50,18 @@ class OC_Theme {
 	}
 
 	public function getSlogan() {
-		return 'Plataforma corporativa unificada';
+		return '';
 	}
 
 	public function getShortFooter() {
 		return '<a href="' . self::SITE . '" target="_blank" rel="noopener noreferrer">'
 			. self::BRAND . '</a>'
-			. ' — Código licenciado sob a AGPL v3 ou posterior.';
+			. '<br>' . 'Código licenciado sob a AGPL v3 ou posterior (AGPL-3.0-or-later).';
 	}
 
 	public function getLongFooter() {
 		return '<a href="' . self::SITE . '" target="_blank" rel="noopener noreferrer">'
 			. self::BRAND . '</a>'
-			. '<br>' . 'Plataforma corporativa unificada.'
 			. '<br>' . 'Código licenciado sob a AGPL v3 ou posterior (AGPL-3.0-or-later).'
 			. '<br>' . '<a href="' . self::ADMIN_HELP . '" target="_blank" rel="noopener noreferrer">'
 			. 'Suporte e administração</a>';

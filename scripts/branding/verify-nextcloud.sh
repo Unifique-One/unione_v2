@@ -8,13 +8,15 @@ BRANDING_MOUNT="/mnt/branding"
 
 NAME="UNIFIQUE ONE"
 PRODUCT_NAME="UNIFIQUE ONE"
-SLOGAN="Plataforma corporativa unificada"
+SLOGAN=""
 LOGO="${BRANDING_MOUNT}/assets/logos/unifique-one-light.svg"
 FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 COLOR="#212492"
 BACKGROUND_COLOR="#F6F8FC"
 FONT="Plus Jakarta Sans"
+CALENDAR_USER="unione@csphere.cloud"
+CALENDAR_USER_EMAIL="unione@csphere.cloud"
 
 EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant unifique_branding)
 DISABLE_APPS=(firstrunwizard nextcloud_announcements support survey_client)
@@ -123,6 +125,14 @@ done
 for f in appinfo/info.xml js/branding.js; do
   check_asset "/var/www/html/apps/unifique_branding/$f"
 done
+
+printf '\nCalendar identity:\n'
+calendar_email="$(occ_read user:setting "$CALENDAR_USER" settings email || true)"
+if [ "$calendar_email" = "$CALENDAR_USER_EMAIL" ]; then
+  ok "calendar email for '${CALENDAR_USER}' = '${CALENDAR_USER_EMAIL}'"
+else
+  bad "calendar email for '${CALENDAR_USER}': expected '${CALENDAR_USER_EMAIL}', got '${calendar_email:-<unset>}'"
+fi
 
 printf '\nEnabled apps:\n'
 app_list="$(occ_read app:list || true)"

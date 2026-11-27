@@ -10,6 +10,8 @@
 	var REPLACEMENT = 'UNIFIQUE ONE';
 	var DESTINATION = 'https://unifique.com.br';
 	var SKIP_ELEMENTS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1 };
+	var LOGIN_HEADLINE_SELECTOR = '[data-login-form-headline], .login-form__headline';
+	var LOGIN_HEADLINE_PREFIX = /faça login em|faca login em|log in to/i;
 
 	function tidy(value) {
 		return String(value).replace(NAME, REPLACEMENT).replace(/\s+/g, ' ').trim();
@@ -103,6 +105,21 @@
 		}
 	}
 
+	// The Vue login form renders "Faça login em UNIFIQUE ONE" into the card
+	// headline. Keep only the canonical product name in that element.
+	function rewriteLoginHeadline(root) {
+		if (!root || !root.querySelectorAll) {
+			return;
+		}
+		var nodes = root.querySelectorAll(LOGIN_HEADLINE_SELECTOR);
+		for (var i = 0; i < nodes.length; i++) {
+			var text = nodes[i].textContent || '';
+			if (LOGIN_HEADLINE_PREFIX.test(text)) {
+				nodes[i].textContent = REPLACEMENT;
+			}
+		}
+	}
+
 	function apply() {
 		try {
 			if (document.title) {
@@ -114,6 +131,7 @@
 				meta.setAttribute('content', tidy(meta.getAttribute('content')));
 			}
 			walk(document.documentElement || document.body);
+			rewriteLoginHeadline(document.documentElement || document.body);
 		} catch (e) {
 			/* Defensive: never break rendering. */
 		}

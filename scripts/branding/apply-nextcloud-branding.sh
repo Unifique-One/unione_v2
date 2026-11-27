@@ -21,13 +21,19 @@ CUSTOM_THEME_CSS_DIR="/var/www/html/custom_apps/unifique-theme/css"
 
 NAME="UNIFIQUE ONE"
 PRODUCT_NAME="UNIFIQUE ONE"
-SLOGAN="Plataforma corporativa unificada"
+SLOGAN=""
 LOGO="${BRANDING_MOUNT}/assets/logos/unifique-one-light.svg"
 FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 BACKGROUND_COLOR="#F6F8FC"
 COLOR="#212492"
 FONT="Plus Jakarta Sans"
+
+# Calendar free/busy (iTIP VFREEBUSY) needs the organizer address registered on
+# the account. Without it, creating an event fails with "Failed to fetch
+# free/busy data" because the server rejects the organizer as unrecognized.
+CALENDAR_USER="unione@csphere.cloud"
+CALENDAR_USER_EMAIL="unione@csphere.cloud"
 
 EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant unifique_branding)
 # Marketing/support apps render Nextcloud-named pages and external redirects.
@@ -172,6 +178,16 @@ elif occ config:system:set defaultapp --value=files; then
   log "defaultapp set to 'files'"
 else
   warn "could not set defaultapp to 'files' (details in ${LOG_FILE})"
+fi
+
+# --- Calendar identity -------------------------------------------------------
+calendar_email="$(occ_output user:setting "$CALENDAR_USER" settings email || true)"
+if [ "$calendar_email" = "$CALENDAR_USER_EMAIL" ]; then
+  log "calendar email for '${CALENDAR_USER}' already '${CALENDAR_USER_EMAIL}' (unchanged)"
+elif occ user:setting "$CALENDAR_USER" settings email "$CALENDAR_USER_EMAIL"; then
+  log "calendar email for '${CALENDAR_USER}' set to '${CALENDAR_USER_EMAIL}'"
+else
+  warn "could not set calendar email for '${CALENDAR_USER}' (details in ${LOG_FILE})"
 fi
 
 # --- Custom theme extension (mounted read-only; core is never modified) ------
