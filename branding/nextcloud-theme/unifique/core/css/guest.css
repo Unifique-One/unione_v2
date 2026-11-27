@@ -1,0 +1,420 @@
+/*
+ * SPDX-FileCopyrightText: 2026 UNIFIQUE
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * UNIFIQUE ONE theme - login and public/guest pages.
+ * Palette is restricted to the official UNIFIQUE ONE tokens, including Denim
+ * #1067CE from the official Brandfetch palette; transparency is derived only
+ * from those exact colours. No logo or favicon is declared here:
+ * the theming app serves the official UNIFIQUE ONE assets.
+ */
+
+/* ==========================================================================
+   1. Tokens - light (default)
+   ========================================================================== */
+html:root,
+html:root body {
+	--color-main-background: #F6F8FC !important;
+	--color-main-background-rgb: 246, 248, 252 !important;
+	--color-main-text: #0F1429 !important;
+	--color-text-maxcontrast: #5E6882 !important;
+	--color-background-hover: #EEF2F9 !important;
+	--color-background-dark: #DCE3F0 !important;
+	--color-background-darker: #C2CCE0 !important;
+	--color-border: #DCE3F0 !important;
+	--color-border-dark: #C2CCE0 !important;
+
+	--color-primary: #212492 !important;
+	--color-primary-rgb: 33, 36, 146 !important;
+	--color-primary-element: #212492 !important;
+	--color-primary-element-rgb: 33, 36, 146 !important;
+	--color-primary-element-text: #FFFFFF !important;
+	--color-primary-text: #FFFFFF !important;
+	--color-primary-element-hover: #161869 !important;
+	--color-primary-element-light: #3539B8 !important;
+	--color-primary-element-light-text: #FFFFFF !important;
+
+	--color-success: #45B649 !important;
+	--color-success-text: #111111 !important;
+	--color-warning: #FFD500 !important;
+	--color-warning-text: #111111 !important;
+	--color-error: #E6007E !important;
+	--color-error-text: #FFFFFF !important;
+	--color-info: #00AEEF !important;
+	--color-info-text: #111111 !important;
+
+	--unifique-bg: #F6F8FC !important;
+	--unifique-surface: #FFFFFF !important;
+	--unifique-surface-alt: #EEF2F9 !important;
+	--unifique-text: #0F1429 !important;
+	--unifique-text-muted: #5E6882 !important;
+	--unifique-border: #DCE3F0 !important;
+	--unifique-link: #1067CE !important; /* Denim: 5.45:1 on white */
+	--unifique-link-hover: #212492 !important;
+	/* The login card stays light for contrast in both schemes. */
+	--unifique-card-bg: #FFFFFF !important;
+	--unifique-card-text: #0F1429 !important;
+	--unifique-card-border: #DCE3F0 !important;
+	--unifique-login-bg: linear-gradient(135deg, #161869 0%, #212492 45%, #3539B8 100%) !important;
+}
+
+/* ==========================================================================
+   2. Tokens - dark (OS preference or explicit selection)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+	/* Nextcloud puts the theme flags on <body>, not on <html>. */
+	html:root body:not([data-theme-light]):not([data-theme-default]) {
+		--color-main-background: #0F1429 !important;
+		--color-main-background-rgb: 15, 20, 41 !important;
+		--color-main-text: #FFFFFF !important;
+		--color-text-maxcontrast: #C2CCE0 !important;
+		--color-background-hover: #2A324B !important;
+		--color-background-dark: #2A324B !important;
+		--color-background-darker: #111111 !important;
+		--color-border: #5E6882 !important;
+		--color-border-dark: #5E6882 !important;
+
+		--color-primary: #212492 !important;
+		--color-primary-rgb: 33, 36, 146 !important;
+		--color-primary-element: #3539B8 !important;
+		--color-primary-element-rgb: 53, 57, 184 !important;
+		--color-primary-element-text: #FFFFFF !important;
+		--color-primary-text: #FFFFFF !important;
+		--color-primary-element-hover: #161869 !important;
+		--color-primary-element-light: #3539B8 !important;
+		--color-primary-element-light-text: #FFFFFF !important;
+
+		--color-success: #45B649 !important;
+		--color-success-text: #111111 !important;
+		--color-warning: #FFD500 !important;
+		--color-warning-text: #111111 !important;
+		--color-error: #E6007E !important;
+		--color-error-text: #FFFFFF !important;
+		--color-info: #00AEEF !important;
+		--color-info-text: #111111 !important;
+
+		--unifique-bg: #0F1429 !important;
+		--unifique-surface: #2A324B !important;
+		--unifique-surface-alt: #111111 !important;
+		--unifique-text: #FFFFFF !important;
+		--unifique-text-muted: #C2CCE0 !important;
+		--unifique-border: #5E6882 !important;
+		--unifique-link: #00AEEF !important;
+		--unifique-link-hover: #3539B8 !important;
+		--unifique-card-bg: #0F1429 !important;
+		--unifique-card-text: #FFFFFF !important;
+		--unifique-card-border: #00AEEF !important;
+		--unifique-login-bg: linear-gradient(135deg, #0F1429 0%, #161869 55%, #212492 100%) !important;
+	}
+}
+
+html:root body[data-theme-dark],
+html:root body[data-themes*='dark'] {
+	--color-main-background: #0F1429 !important;
+	--color-main-background-rgb: 15, 20, 41 !important;
+	--color-main-text: #FFFFFF !important;
+	--color-text-maxcontrast: #C2CCE0 !important;
+	--color-background-hover: #2A324B !important;
+	--color-background-dark: #2A324B !important;
+	--color-background-darker: #111111 !important;
+	--color-border: #5E6882 !important;
+	--color-border-dark: #5E6882 !important;
+
+	--color-primary: #212492 !important;
+	--color-primary-rgb: 33, 36, 146 !important;
+	--color-primary-element: #3539B8 !important;
+	--color-primary-element-rgb: 53, 57, 184 !important;
+	--color-primary-element-text: #FFFFFF !important;
+	--color-primary-text: #FFFFFF !important;
+	--color-primary-element-hover: #161869 !important;
+	--color-primary-element-light: #3539B8 !important;
+	--color-primary-element-light-text: #FFFFFF !important;
+
+	--color-success: #45B649 !important;
+	--color-success-text: #111111 !important;
+	--color-warning: #FFD500 !important;
+	--color-warning-text: #111111 !important;
+	--color-error: #E6007E !important;
+	--color-error-text: #FFFFFF !important;
+	--color-info: #00AEEF !important;
+	--color-info-text: #111111 !important;
+
+	--unifique-bg: #0F1429 !important;
+	--unifique-surface: #2A324B !important;
+	--unifique-surface-alt: #111111 !important;
+	--unifique-text: #FFFFFF !important;
+	--unifique-text-muted: #C2CCE0 !important;
+	--unifique-border: #5E6882 !important;
+	--unifique-link: #00AEEF !important;
+	--unifique-link-hover: #3539B8 !important;
+	--unifique-card-bg: #0F1429 !important;
+	--unifique-card-text: #FFFFFF !important;
+	--unifique-card-border: #00AEEF !important;
+	--unifique-login-bg: linear-gradient(135deg, #0F1429 0%, #161869 55%, #212492 100%) !important;
+}
+
+/* ==========================================================================
+   3. Guest surfaces - foreground always paired with background
+   ========================================================================== */
+html,
+body {
+	background: var(--unifique-bg) !important;
+	color: var(--unifique-text) !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+#content,
+.content,
+main,
+.guest-page,
+.public-page,
+.share-page {
+	background: var(--unifique-bg) !important;
+	color: var(--unifique-text) !important;
+}
+
+.card,
+.widget,
+.details,
+.filelist,
+.public-viewer,
+.dialog,
+.modal-container,
+.modal-wrapper {
+	background: var(--unifique-surface) !important;
+	color: var(--unifique-text) !important;
+	border-color: var(--unifique-border) !important;
+}
+
+/* ==========================================================================
+   4. Login page - LP-style deep-navy gradient, solid high-contrast card
+   The official cloud landing page uses navy + royal blue with yellow/cyan
+   accents. Those exact brand tokens are reused here; the translucent default
+   .guest-box (which rendered as a grey card) is replaced by a solid surface.
+   ========================================================================== */
+body#body-login,
+body.login,
+body[data-page='login'],
+.login-page {
+	background-color: #0F1429 !important;
+	background-image:
+		radial-gradient(circle at 12% 18%, rgba(0, 174, 239, 0.28) 0, transparent 30%),
+		radial-gradient(circle at 88% 12%, rgba(245, 236, 90, 0.20) 0, transparent 26%),
+		var(--unifique-login-bg) !important;
+	background-attachment: fixed !important;
+	background-size: cover !important;
+	color: #FFFFFF !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+/* The rendered login card is .guest-box.login-box, not #login form. */
+#body-login .guest-box,
+#body-login .login-box,
+#login .guest-box,
+.login-form,
+.form-login,
+.login-card,
+#login .card {
+	background: var(--unifique-card-bg) !important;
+	color: var(--unifique-card-text) !important;
+	border: 1px solid var(--unifique-card-border) !important;
+	border-radius: 14px !important;
+	box-shadow: 0 18px 45px rgba(15, 20, 41, 0.35) !important;
+	-webkit-backdrop-filter: none !important;
+	backdrop-filter: none !important;
+}
+
+#login .guest-box.login-box {
+	box-sizing: border-box !important;
+	width: min(360px, calc(100vw - 32px)) !important;
+	padding: 30px !important;
+}
+
+#body-login .guest-box::before,
+#login .guest-box::before {
+	content: '' !important;
+	display: block !important;
+	height: 4px !important;
+	margin: -18px -18px 20px !important;
+	border-radius: 14px 14px 0 0 !important;
+	background: linear-gradient(90deg, #F5EC5A 0%, #00AEEF 55%, #1067CE 100%) !important;
+}
+
+/* The inner Vue form inherits the card surface instead of adding a second box. */
+#login form.login-form {
+	background: transparent !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	padding: 0 !important;
+}
+
+#body-login footer.guest-box {
+	background: var(--unifique-card-bg) !important;
+	color: var(--unifique-card-text) !important;
+	border-color: var(--unifique-card-border) !important;
+}
+
+#body-login footer.guest-box a {
+	color: var(--unifique-link) !important;
+}
+
+#body-login .guest-box p,
+#body-login .guest-box label,
+#login h1,
+#login label,
+#login p,
+.login-form h1,
+.login-form label,
+.login-form p {
+	color: var(--unifique-card-text) !important;
+}
+
+#login input[type='text'],
+#login input[type='password'],
+#login input[type='email'] {
+	background: var(--unifique-card-bg) !important;
+	color: var(--unifique-card-text) !important;
+	border-color: var(--unifique-card-border) !important;
+}
+
+noscript {
+	display: none !important;
+}
+
+/* External marketing links inside noscript or login footers are not allowed. */
+img[src*="nextcloud.com"],
+img[src*="github.com/nextcloud"] {
+	display: none !important;
+}
+
+/* ==========================================================================
+   5. Form controls, links, buttons
+   ========================================================================== */
+input,
+textarea,
+select,
+.input-field,
+#login input,
+.login-form input {
+	background: var(--unifique-card-bg) !important;
+	color: var(--unifique-card-text) !important;
+	border: 1px solid var(--unifique-card-border) !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: #5E6882 !important;
+}
+
+a,
+a:visited {
+	color: var(--unifique-link) !important;
+}
+
+a:hover,
+a:focus {
+	color: var(--unifique-link-hover) !important;
+}
+
+button:not(.icon):not(.unset),
+.button:not(.icon),
+input[type='submit'],
+input[type='button'],
+.primary,
+.btn-primary,
+#login input[type='submit'],
+.login-form button[type='submit'] {
+	background: #1067CE !important;
+	color: #FFFFFF !important;
+	border: 1px solid #1067CE !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+button:not(.icon):not(.unset):hover,
+button:not(.icon):not(.unset):focus,
+.button:not(.icon):hover,
+.button:not(.icon):focus,
+input[type='submit']:hover,
+input[type='button']:hover,
+.primary:hover,
+.btn-primary:hover,
+#login input[type='submit']:hover,
+.login-form button[type='submit']:hover {
+	background: #212492 !important;
+	color: #FFFFFF !important;
+	border-color: #212492 !important;
+}
+
+.warning,
+.security-warning {
+	background: #FFD500 !important;
+	color: #111111 !important;
+	border-color: #F5EC5A !important;
+}
+
+/* ==========================================================================
+   6. Branding cleanup - no upstream marketing links or external redirects
+   ========================================================================== */
+a[href*="nextcloud.com"],
+a[href*="github.com/nextcloud"],
+a[href*="bsky.app"],
+a[href*="mastodon.xyz/@nextcloud"],
+a[href*="facebook.com/Nextcloud"],
+a[href*="facebook.com/nextcloud"],
+a[href*="newsletter.nextcloud.com"] {
+	display: none !important;
+}
+
+.development-notice {
+	font-size: 0 !important;
+	background: var(--unifique-surface-alt) !important;
+	color: var(--unifique-text) !important;
+	border: 1px solid var(--unifique-border) !important;
+	padding: 10px !important;
+}
+
+.development-notice > * {
+	display: none !important;
+}
+
+.development-notice::after {
+	content: 'Código licenciado sob a AGPL';
+	display: block !important;
+	font-size: 13px !important;
+	color: var(--unifique-text) !important;
+}
+
+.help-content__heading {
+	font-size: 0 !important;
+	color: var(--unifique-text) !important;
+}
+
+.help-content__heading > * {
+	display: none !important;
+}
+
+.help-content__heading::after {
+	content: 'Ajuda e privacidade — UNIFIQUE ONE';
+	font-size: 16px !important;
+	font-weight: 600 !important;
+	color: var(--unifique-text) !important;
+}
+
+#version a {
+	display: inline-block !important;
+	font-size: 0 !important;
+	color: var(--unifique-link) !important;
+}
+
+#version a > * {
+	display: none !important;
+}
+
+#version a::after {
+	content: 'UNIFIQUE ONE';
+	font-size: 13px !important;
+	color: var(--unifique-link) !important;
+}
+
+/* The document <title> is set by defaults.php; CSS cannot style it. */

@@ -40,3 +40,18 @@ Os seguintes nomes aparecem no documento oficial e constituem o vocabulário ini
 Preferir o script oficial do Lucide quando a aplicação permitir CDN. Em ambientes sem acesso a CDN,
 o consumidor deve servir o Lucide localmente a partir de seu próprio bundle, preservando os mesmos
 nomes de ícone.
+
+## Ativos oficiais adicionados em 2026-11-27
+
+Fornecidos pelo proprietário da marca e baixados das URLs oficiais indicadas:
+
+| Arquivo | Origem | Uso |
+| --- | --- | --- |
+| `whatsapp-oficial.png` | `encrypted-tbn0.gstatic.com/...AN9GcTCSxG-rje...` | ícone de contato WhatsApp |
+| `telegram-oficial.png` | `encrypted-tbn0.gstatic.com/...AN9GcTOSqVNihp...` | ícone de contato Telegram |
+| `hospedagem-sites-oficial.png` | `encrypted-tbn0.gstatic.com/...AN9GcTY9MvRs05...` | ícone de hospedagem de sites |
+| `unifique-one-azul.jpg` | `https://share.gemini.google/jWSvfArpG1sT` | ícone UNIFIQUE ONE para fundos claros |
+| `unifique-one-branco.jpg` | `https://share.gemini.google/QjSe4o7Ue1Tb` | ícone UNIFIQUE ONE para fundos escuros |
+
+Os dois arquivos do Gemini são servidos como JPEG apesar da extensão compartilhada; o nome local
+foi corrigido para `.jpg`. Nenhum deles substitui os favicons canônicos de `../favicons/`.

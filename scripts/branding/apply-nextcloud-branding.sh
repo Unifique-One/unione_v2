@@ -29,7 +29,9 @@ BACKGROUND_COLOR="#F6F8FC"
 COLOR="#212492"
 FONT="Plus Jakarta Sans"
 
-EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant)
+EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant unifique_branding)
+# Marketing/support apps render Nextcloud-named pages and external redirects.
+DISABLE_APPS=(firstrunwizard nextcloud_announcements support survey_client)
 
 touch "$LOG_FILE"
 
@@ -119,10 +121,14 @@ theming_config_set background backgroundColor
 theming_config_set logo "$LOGO"
 theming_config_set logoheader "$LOGO"
 theming_config_set favicon "$FAVICON"
+theming_config_set url 'https://unifique.com.br'
+theming_config_set imprintUrl 'https://unifique.com.br'
+theming_config_set privacyUrl 'https://unifique.com.br'
 # Keys not exposed by theming:config are set through the app configuration.
 set_theming_value productName "$PRODUCT_NAME"
 set_theming_value icon "$ICON"
 set_theming_value font "$FONT"
+set_theming_value docBaseUrl 'https://unifique.com.br'
 
 # --- Apps --------------------------------------------------------------------
 app_list="$(occ_output app:list || true)"
@@ -146,6 +152,18 @@ for app in "${EXPECTED_APPS[@]}"; do
   fi
 done
 
+for app in "${DISABLE_APPS[@]}"; do
+  if [ -n "$app_list" ] && ! app_is_enabled "$app"; then
+    log "app '${app}' already disabled (unchanged)"
+    continue
+  fi
+  if occ app:disable "$app"; then
+    log "app '${app}' disabled (marketing/external redirects removed)"
+  else
+    warn "app '${app}' could not be disabled; continuing"
+  fi
+done
+
 # --- Default application -----------------------------------------------------
 default_app="$(occ_output config:system:get defaultapp || true)"
 if [ "$default_app" = "files" ]; then
@@ -156,19 +174,32 @@ else
   warn "could not set defaultapp to 'files' (details in ${LOG_FILE})"
 fi
 
-# --- Custom theme CSS (staging only; core is never modified) -----------------
-if podman exec -u www-data "$NC_CONTAINER" sh -c \
-    'for f in /mnt/branding/themes/*.css; do [ -f "$f" ] && exit 0; done; exit 1' \
+# --- Custom theme extension (mounted read-only; core is never modified) ------
+if podman exec "$NC_CONTAINER" sh -c '[ -f /var/www/html/themes/unifique/defaults.php ]' \
     >>"$LOG_FILE" 2>&1; then
-  if podman exec "$NC_CONTAINER" sh -c \
-      'mkdir -p "$1" && cp -f /mnt/branding/themes/*.css "$1"/' \
-      sh "$CUSTOM_THEME_CSS_DIR" >>"$LOG_FILE" 2>&1; then
-    log "custom theme CSS staged at ${CUSTOM_THEME_CSS_DIR} (container path); Nextcloud core untouched"
+  if occ config:system:set theme --value=unifique; then
+    log "system theme set to 'unifique' (official light/dark extension)"
   else
-    warn "could not stage custom theme CSS at ${CUSTOM_THEME_CSS_DIR}; continuing"
+    warn "could not enable the 'unifique' theme (details in ${LOG_FILE})"
   fi
+  # Keep both light and dark selectable instead of enforcing a single scheme.
+  occ config:system:set enforce_theme --value='' >>"$LOG_FILE" 2>&1 || true
 else
-  warn "no CSS files found in ${BRANDING_MOUNT}/themes; skipping custom theme CSS staging"
+  warn "official theme not mounted at /var/www/html/themes/unifique; skipping"
+fi
+
+# --- Asset cache bust --------------------------------------------------------
+# The mounted theme and cleanup app are read-only; increment the theming
+# cachebuster so browsers and the reverse proxy refetch their CSS/JS.
+cachebuster="$(occ_output config:app:get theming cachebuster || true)"
+case "$cachebuster" in
+  ''|*[!0-9]*) cachebuster=0 ;;
+esac
+next_cachebuster=$((cachebuster + 1))
+if occ config:app:set theming cachebuster --value="$next_cachebuster"; then
+  log "theming cachebuster bumped: ${cachebuster} -> ${next_cachebuster}"
+else
+  warn "could not bump theming cachebuster (details in ${LOG_FILE})"
 fi
 
 log "=== UNIFIQUE ONE Nextcloud branding apply: END ==="

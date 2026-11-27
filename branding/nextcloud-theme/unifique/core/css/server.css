@@ -1,0 +1,470 @@
+/*
+ * SPDX-FileCopyrightText: 2026 UNIFIQUE
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ *
+ * UNIFIQUE ONE theme - authenticated UI overrides.
+ * All colours come from the official token set:
+ * royal #212492, royal-dark #161869, royal-light #3539B8,
+ * Denim #1067CE, yellow #F5EC5A, yellow-bright #FFD500, cyan #00AEEF,
+ * magenta #E6007E, green #45B649, purple #743BBD,
+ * white #FFFFFF, black #111111,
+ * gray-50 #F6F8FC, gray-100 #EEF2F9, gray-200 #DCE3F0,
+ * gray-300 #C2CCE0, gray-500 #5E6882, gray-700 #2A324B, gray-900 #0F1429.
+ * Transparency is derived only from those exact colours.
+ */
+
+/* ==========================================================================
+   1. Tokens - light (default)
+   !important keeps the later dynamic-theming stylesheet from restoring white.
+   ========================================================================== */
+html:root,
+html:root body {
+	--color-main-background: #F6F8FC !important;
+	--color-main-background-rgb: 246, 248, 252 !important;
+	--color-main-text: #0F1429 !important;
+	--color-text-maxcontrast: #5E6882 !important;
+	--color-background-hover: #EEF2F9 !important;
+	--color-background-dark: #DCE3F0 !important;
+	--color-background-darker: #C2CCE0 !important;
+	--color-border: #DCE3F0 !important;
+	--color-border-dark: #C2CCE0 !important;
+
+	--color-primary: #212492 !important;
+	--color-primary-rgb: 33, 36, 146 !important;
+	--color-primary-element: #212492 !important;
+	--color-primary-element-rgb: 33, 36, 146 !important;
+	--color-primary-element-text: #FFFFFF !important;
+	--color-primary-text: #FFFFFF !important;
+	--color-primary-element-hover: #161869 !important;
+	--color-primary-element-light: #3539B8 !important;
+	--color-primary-element-light-text: #FFFFFF !important;
+
+	--color-success: #45B649 !important;
+	--color-success-text: #111111 !important;
+	--color-warning: #FFD500 !important;
+	--color-warning-text: #111111 !important;
+	--color-error: #E6007E !important;
+	--color-error-text: #FFFFFF !important;
+	--color-info: #00AEEF !important;
+	--color-info-text: #111111 !important;
+
+	/* Semantic tokens used by the structural rules below. */
+	--unifique-bg: #F6F8FC !important;
+	--unifique-surface: #FFFFFF !important;
+	--unifique-surface-alt: #EEF2F9 !important;
+	--unifique-text: #0F1429 !important;
+	--unifique-text-muted: #5E6882 !important;
+	--unifique-border: #DCE3F0 !important;
+	--unifique-link: #1067CE !important; /* Denim: 5.45:1 on white */
+	--unifique-link-hover: #212492 !important;
+	--unifique-overlay: #161869 !important;
+	--unifique-header-bg: linear-gradient(90deg, #161869 0%, #212492 45%, #1067CE 100%) !important;
+}
+
+/* ==========================================================================
+   2. Tokens - dark
+   Both OS preference and explicit user selection are supported. An explicit
+   data-theme-light selection wins over the OS preference.
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+	/* Theme flags live on <body>; use a body-scoped selector so an explicit
+	   light selection still wins over the operating-system preference. */
+	html:root body:not([data-theme-light]):not([data-theme-default]) {
+		--color-main-background: #0F1429 !important;
+		--color-main-background-rgb: 15, 20, 41 !important;
+		--color-main-text: #FFFFFF !important;
+		--color-text-maxcontrast: #C2CCE0 !important;
+		--color-background-hover: #2A324B !important;
+		--color-background-dark: #2A324B !important;
+		--color-background-darker: #111111 !important;
+		--color-border: #5E6882 !important;
+		--color-border-dark: #5E6882 !important;
+
+		--color-primary: #212492 !important;
+		--color-primary-rgb: 33, 36, 146 !important;
+		--color-primary-element: #3539B8 !important;
+		--color-primary-element-rgb: 53, 57, 184 !important;
+		--color-primary-element-text: #FFFFFF !important;
+		--color-primary-text: #FFFFFF !important;
+		--color-primary-element-hover: #161869 !important;
+		--color-primary-element-light: #3539B8 !important;
+		--color-primary-element-light-text: #FFFFFF !important;
+
+		--color-success: #45B649 !important;
+		--color-success-text: #111111 !important;
+		--color-warning: #FFD500 !important;
+		--color-warning-text: #111111 !important;
+		--color-error: #E6007E !important;
+		--color-error-text: #FFFFFF !important;
+		--color-info: #00AEEF !important;
+		--color-info-text: #111111 !important;
+
+		--unifique-bg: #0F1429 !important;
+		--unifique-surface: #2A324B !important;
+		--unifique-surface-alt: #111111 !important;
+		--unifique-text: #FFFFFF !important;
+		--unifique-text-muted: #C2CCE0 !important;
+		--unifique-border: #5E6882 !important;
+		--unifique-link: #00AEEF !important;
+		--unifique-link-hover: #3539B8 !important;
+		--unifique-overlay: #111111 !important;
+		--unifique-header-bg: linear-gradient(90deg, #161869 0%, #212492 45%, #1067CE 100%) !important;
+	}
+}
+
+html:root body[data-theme-dark],
+html:root body[data-themes*='dark'] {
+	--color-main-background: #0F1429 !important;
+	--color-main-background-rgb: 15, 20, 41 !important;
+	--color-main-text: #FFFFFF !important;
+	--color-text-maxcontrast: #C2CCE0 !important;
+	--color-background-hover: #2A324B !important;
+	--color-background-dark: #2A324B !important;
+	--color-background-darker: #111111 !important;
+	--color-border: #5E6882 !important;
+	--color-border-dark: #5E6882 !important;
+
+	--color-primary: #212492 !important;
+	--color-primary-rgb: 33, 36, 146 !important;
+	--color-primary-element: #3539B8 !important;
+	--color-primary-element-rgb: 53, 57, 184 !important;
+	--color-primary-element-text: #FFFFFF !important;
+	--color-primary-text: #FFFFFF !important;
+	--color-primary-element-hover: #161869 !important;
+	--color-primary-element-light: #3539B8 !important;
+	--color-primary-element-light-text: #FFFFFF !important;
+
+	--color-success: #45B649 !important;
+	--color-success-text: #111111 !important;
+	--color-warning: #FFD500 !important;
+	--color-warning-text: #111111 !important;
+	--color-error: #E6007E !important;
+	--color-error-text: #FFFFFF !important;
+	--color-info: #00AEEF !important;
+	--color-info-text: #111111 !important;
+
+	--unifique-bg: #0F1429 !important;
+	--unifique-surface: #2A324B !important;
+	--unifique-surface-alt: #111111 !important;
+	--unifique-text: #FFFFFF !important;
+	--unifique-text-muted: #C2CCE0 !important;
+	--unifique-border: #5E6882 !important;
+	--unifique-link: #00AEEF !important;
+	--unifique-link-hover: #3539B8 !important;
+	--unifique-overlay: #111111 !important;
+	--unifique-header-bg: linear-gradient(90deg, #161869 0%, #212492 45%, #1067CE 100%) !important;
+}
+
+/* ==========================================================================
+   3. Base surfaces - background and foreground are ALWAYS set together
+   ========================================================================== */
+html,
+body {
+	background: var(--unifique-bg) !important;
+	color: var(--unifique-text) !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+#content,
+#content-vue,
+.content,
+main,
+.app-content,
+#app-content-vue,
+.files-app,
+.dashboard,
+#dashboard {
+	background: var(--unifique-bg) !important;
+	color: var(--unifique-text) !important;
+}
+
+.app-navigation,
+#app-navigation,
+.app-sidebar,
+#app-sidebar,
+.sidebar,
+#controls,
+.controls,
+.card,
+.widget,
+.dashboard-widget,
+.guide,
+.guides,
+.settings-section,
+.section,
+.dialog,
+.modal-container,
+.modal-wrapper,
+.emptycontent,
+.toast,
+.notification,
+.popovermenu,
+.contextmenu,
+.menu {
+	background: var(--unifique-surface) !important;
+	color: var(--unifique-text) !important;
+	border-color: var(--unifique-border) !important;
+}
+
+.app-navigation-secondary,
+#app-navigation .app-navigation-entry,
+.settings-section + .settings-section {
+	background: var(--unifique-surface-alt) !important;
+	color: var(--unifique-text) !important;
+}
+
+input,
+textarea,
+select,
+.input-field,
+[contenteditable='true'] {
+	background: var(--unifique-surface) !important;
+	color: var(--unifique-text) !important;
+	border: 1px solid var(--unifique-border) !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: var(--unifique-text-muted) !important;
+}
+
+/* Muted helper text keeps a readable foreground. */
+.muted,
+.subtitle,
+.caption,
+.help,
+.hint,
+.app-navigation-entry-utils-counter {
+	color: var(--unifique-text-muted) !important;
+}
+
+/* ==========================================================================
+   4. Header - official blue gradient, white text and icons
+   ========================================================================== */
+#header,
+.header,
+body #header,
+header {
+	background: var(--unifique-header-bg) !important;
+	color: #FFFFFF !important;
+	border-bottom: 1px solid #3539B8 !important;
+}
+
+#header,
+#header a,
+#header button,
+#header span,
+#header svg,
+.header a,
+.header button,
+.header svg {
+	color: #FFFFFF !important;
+}
+
+#header svg,
+.header svg {
+	fill: currentColor !important;
+}
+
+#header .header-menu,
+#header .header-menus,
+#header .popovermenu,
+#header .user-menu,
+.header .header-menu {
+	background: var(--unifique-overlay) !important;
+	color: #FFFFFF !important;
+	border-color: #3539B8 !important;
+}
+
+#header input,
+.header input {
+	background: rgba(255, 255, 255, 0.12) !important;
+	color: #FFFFFF !important;
+	border-color: #3539B8 !important;
+}
+
+/* Header popups are surfaces, not header chrome. Their foreground must be
+   inverted relative to the blue header: dark text on light cards in the light
+   theme, white text on dark cards in the dark theme. Without these rules the
+   white header text leaked into the popup and made entries invisible. */
+#header .header-menu__wrapper,
+#header .header-menu__content,
+#header .popovermenu,
+.header-menu__wrapper,
+.header-menu__content {
+	background: var(--unifique-surface) !important;
+	color: var(--unifique-text) !important;
+	border: 1px solid var(--unifique-border) !important;
+	border-radius: 10px !important;
+}
+
+#header .header-menu__wrapper *,
+#header .header-menu__content *,
+.header-menu__wrapper *,
+.header-menu__content * {
+	color: var(--unifique-text) !important;
+}
+
+#header .header-menu__wrapper a,
+#header .header-menu__content a,
+.header-menu__wrapper a,
+.header-menu__content a {
+	color: var(--unifique-link) !important;
+}
+
+#header .header-menu__wrapper input,
+#header .header-menu__content input,
+.header-menu__wrapper input,
+.header-menu__content input {
+	background: var(--unifique-surface) !important;
+	color: var(--unifique-text) !important;
+	border-color: var(--unifique-border) !important;
+}
+
+#header .header-menu__carret,
+.header-menu__carret {
+	border-bottom-color: var(--unifique-surface) !important;
+}
+
+/* ==========================================================================
+   5. Links, buttons, semantic states
+   ========================================================================== */
+a,
+a:visited {
+	color: var(--unifique-link) !important;
+}
+
+a:hover,
+a:focus {
+	color: var(--unifique-link-hover) !important;
+}
+
+button:not(.icon):not(.unset),
+.button:not(.icon),
+input[type='submit'],
+input[type='button'],
+.primary,
+.btn-primary,
+.action-primary {
+	background: #1067CE !important;
+	color: #FFFFFF !important;
+	border: 1px solid #1067CE !important;
+	font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+button:not(.icon):not(.unset):hover,
+button:not(.icon):not(.unset):focus,
+.button:not(.icon):hover,
+.button:not(.icon):focus,
+input[type='submit']:hover,
+input[type='button']:hover,
+.primary:hover,
+.btn-primary:hover,
+.action-primary:hover {
+	background: #212492 !important;
+	color: #FFFFFF !important;
+	border-color: #212492 !important;
+}
+
+.success,
+.status-success {
+	background: #45B649 !important;
+	color: #111111 !important;
+}
+
+.warning,
+.status-warning,
+.security-warning,
+.update-warning {
+	background: #FFD500 !important;
+	color: #111111 !important;
+	border-color: #F5EC5A !important;
+}
+
+.error,
+.status-error {
+	background: #E6007E !important;
+	color: #FFFFFF !important;
+}
+
+.info,
+.status-info {
+	background: #00AEEF !important;
+	color: #111111 !important;
+}
+
+/* Legal/license notices and security warnings stay visible. */
+.warning a,
+.security-warning a,
+.update-warning a {
+	color: #161869 !important;
+}
+
+/* ==========================================================================
+   6. Branding cleanup - no upstream marketing links or external redirects
+   ========================================================================== */
+a[href*="nextcloud.com"],
+a[href*="github.com/nextcloud"],
+a[href*="bsky.app"],
+a[href*="mastodon.xyz/@nextcloud"],
+a[href*="facebook.com/Nextcloud"],
+a[href*="facebook.com/nextcloud"],
+a[href*="newsletter.nextcloud.com"] {
+	display: none !important;
+}
+
+/* Keep the block as a neutral AGPL notice instead of marketing copy. */
+.development-notice {
+	font-size: 0 !important;
+	background: var(--unifique-surface-alt) !important;
+	color: var(--unifique-text) !important;
+	border: 1px solid var(--unifique-border) !important;
+	padding: 10px !important;
+}
+
+.development-notice > * {
+	display: none !important;
+}
+
+.development-notice::after {
+	content: 'Código licenciado sob a AGPL';
+	display: block !important;
+	font-size: 13px !important;
+	color: var(--unifique-text) !important;
+}
+
+.help-content__heading {
+	font-size: 0 !important;
+	color: var(--unifique-text) !important;
+}
+
+.help-content__heading > * {
+	display: none !important;
+}
+
+.help-content__heading::after {
+	content: 'Ajuda e privacidade — UNIFIQUE ONE';
+	font-size: 16px !important;
+	font-weight: 600 !important;
+	color: var(--unifique-text) !important;
+}
+
+/* Admin overview version link: replace the visible product string. */
+#version a {
+	display: inline-block !important;
+	font-size: 0 !important;
+	color: var(--unifique-link) !important;
+}
+
+#version a > * {
+	display: none !important;
+}
+
+#version a::after {
+	content: 'UNIFIQUE ONE';
+	font-size: 13px !important;
+	color: var(--unifique-link) !important;
+}
+
+/* The document <title> cannot be styled from CSS; defaults.php supplies it. */

@@ -39,6 +39,9 @@ connector unit is included, but no Cloudflare/DNS changes are performed here.
 - `/opt/unione/branding/integrations/services/status` must contain the static
   status site.
 - `/opt/unione/branding` is mounted read-only into Nextcloud at `/mnt/branding`.
+- `/opt/unione/branding/nextcloud-theme/unifique` is mounted read-only at `/var/www/html/themes/unifique`.
+- `/opt/unione/branding/nextcloud-apps/unifique_branding` is mounted read-only at `/var/www/html/apps/unifique_branding`.
+  These are supported extension points; Nextcloud core is never edited.
 
 Nothing outside `/opt/unione/stack` is created or modified by this repository.
 

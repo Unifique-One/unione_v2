@@ -23,8 +23,8 @@ arquivos oficiais estiverem disponíveis.
 
 ### Nextcloud
 
-- `theming.favicon` = `/mnt/branding/assets/favicons/favicon-32x32-01e518e661.png`
-- `theming.icon` = `/mnt/branding/assets/favicons/apple-touch-icon-c435f4f4da.png`
+- `theming.favicon` = `/mnt/branding/assets/favicons/favicon-cd754f5597.ico` (ICO oficial; `theming:config` exige MIME `image/vnd.microsoft.icon`)
+- `theming.icon` = `/mnt/branding/assets/favicons/apple-touch-icon-c435f4f4da.png` (o endpoint `/apps/theming/icon` serve o ICO oficial)
 
 ### Página de status
 
@@ -50,3 +50,15 @@ Regras:
 4. O domínio canônico é `csphere.cloud`.
 5. Usar `favicon.svg` somente como fallback legado quando o consumidor não aceitar PNG/ICO, sem
    apresentá-lo como ativo canônico.
+
+### Conjunto declarado pela LP oficial `https://lp.unifique.com.br/cloud/`
+
+A landing page oficial declara explicitamente estes ícones; foram baixados para inventário e não
+substituem os arquivos canônicos acima:
+
+| Arquivo local | URL oficial |
+| --- | --- |
+| `lp-unifique-32x32.png` | `cropped-Logo-ii-Cores-32x32.png` (`rel=icon`, 32×32) |
+| `lp-unifique-192x192.png` | `cropped-Logo-ii-Cores-192x192.png` (`rel=icon`, 192×192) |
+| `lp-unifique-apple-touch-180x180.png` | `cropped-Logo-ii-Cores-180x180.png` (`apple-touch-icon`) |
+| `lp-unifique-270x270.png` | `cropped-Logo-ii-Cores-270x270.png` |

@@ -12,6 +12,8 @@ TRAEFIK_STATIC="/opt/unione/traefik/traefik.yml"
 TRAEFIK_DYNAMIC="/opt/unione/traefik/dynamic/services.yml"
 ADMIN_HTPASSWD="/opt/unione/secrets/admin.htpasswd"
 BRANDING_DIR="/opt/unione/branding"
+THEME_DIR="$BRANDING_DIR/nextcloud-theme/unifique"
+APP_DIR="$BRANDING_DIR/nextcloud-apps/unifique_branding"
 STATUS_DIR="$BRANDING_DIR/integrations/services/status"
 COTURN_ENV="$STACK_DIR/env/coturn.env"
 COTURN_CONF="$STACK_DIR/config/coturn.conf"
@@ -96,6 +98,8 @@ run_container unione-nextcloud \
 	--network-alias nextcloud \
 	-v unione-nextcloud:/var/www/html \
 	-v "$BRANDING_DIR:/mnt/branding:ro" \
+	-v "$THEME_DIR:/var/www/html/themes/unifique:ro" \
+	-v "$APP_DIR:/var/www/html/apps/unifique_branding:ro" \
 	--env-file "$ENV_FILE" \
 	nextcloud:stable-apache
 

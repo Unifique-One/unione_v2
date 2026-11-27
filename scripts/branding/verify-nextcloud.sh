@@ -16,7 +16,10 @@ COLOR="#212492"
 BACKGROUND_COLOR="#F6F8FC"
 FONT="Plus Jakarta Sans"
 
-EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant)
+EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant unifique_branding)
+DISABLE_APPS=(firstrunwizard nextcloud_announcements support survey_client)
+OFFICIAL_URL='https://unifique.com.br'
+THEME_ID='unifique'
 
 failures=0
 
@@ -103,6 +106,24 @@ check_asset "$LOGO"
 check_asset "$FAVICON"
 check_asset "$ICON"
 
+printf '\nExternal links and official theme:\n'
+check_theming_config url "$OFFICIAL_URL"
+check_theming_config imprintUrl "$OFFICIAL_URL"
+check_theming_config privacyUrl "$OFFICIAL_URL"
+check_theming docBaseUrl "$OFFICIAL_URL"
+system_theme="$(occ_read config:system:get theme || true)"
+if [ "$system_theme" = "$THEME_ID" ]; then
+  ok "system theme = '${THEME_ID}' (light/dark selectable)"
+else
+  bad "system theme: expected '${THEME_ID}', got '${system_theme:-<unset>}'"
+fi
+for f in defaults.php core/css/server.css core/css/guest.css; do
+  check_asset "/var/www/html/themes/${THEME_ID}/$f"
+done
+for f in appinfo/info.xml js/branding.js; do
+  check_asset "/var/www/html/apps/unifique_branding/$f"
+done
+
 printf '\nEnabled apps:\n'
 app_list="$(occ_read app:list || true)"
 enabled_apps="$(printf '%s\n' "$app_list" | awk '
@@ -115,6 +136,20 @@ for app in "${EXPECTED_APPS[@]}"; do
     ok "app '${app}' is enabled"
   else
     bad "app '${app}' is NOT enabled (missing or disabled)"
+  fi
+done
+
+printf '\nDisabled marketing apps:\n'
+for app in "${DISABLE_APPS[@]}"; do
+  if printf '%s\n' "$app_list" | awk -v a="$app" '
+    /^[[:space:]]*Disabled:/ { in_disabled = 1; next }
+    /^[[:space:]]*Enabled:/  { in_disabled = 0 }
+    in_disabled && $1 == "-" && $2 == a ":" { found = 1 }
+    END { exit(found ? 0 : 1) }
+  '; then
+    ok "app '${app}' is disabled"
+  else
+    bad "app '${app}' is NOT disabled"
   fi
 done
 

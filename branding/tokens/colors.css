@@ -2,9 +2,11 @@
  * UNIFIQUE ONE — Design System
  * tokens/colors.css
  *
- * Fonte única: /opt/unione/pt/unione.md ("Cores Institucionais Oficiais",
- * "Cores de Destaque & Energia", "Neutros & Superfícies" e "Tokens Semânticos").
- * Nenhuma cor fora dessa lista foi introduzida. Não substituir valores.
+ * Fontes: /opt/unione/pt/unione.md ("Cores Institucionais Oficiais",
+ * "Cores de Destaque & Energia", "Neutros & Superfícies" e "Tokens Semânticos")
+ * e a paleta oficial Unifique publicada em https://brandfetch.com/tca.com.br
+ * (Jacksons Purple #212492, Energy Yellow #F5EC5A e Denim #1067CE).
+ * Nenhuma cor fora dessas listas foi introduzida. Não substituir valores.
  */
 
 :root {
@@ -14,6 +16,7 @@
   --unifique-royal: #212492;       /* Azul Royal Oficial da marca Unifique */
   --unifique-royal-dark: #161869;  /* Azul Marinho Profundo (hover / active) */
   --unifique-royal-light: #3539B8; /* Azul Royal Vibrante */
+  --unifique-denim: #1067CE;       /* Denim — paleta oficial Unifique (Brandfetch) */
 
   --unifique-primary: #212492;
   --unifique-primary-dark: #161869;

@@ -5,7 +5,7 @@
 These rules come directly from `pt/domain.md` and the pre-deploy baseline in `inventory.md`:
 
 - Nextcloud remains internal technology; the user-facing product name is **UNIFIQUE ONE** in every interface.
-- `/opt/unione/pt/unione.md` is the only source of visual identity: no invented colours, logos or favicons.
+- `/opt/unione/pt/unione.md` and the official Unifique palette published at `https://brandfetch.com/tca.com.br` are the only sources of visual identity: no invented colours, logos or favicons. Brandfetch adds Denim `#1067CE` to the already documented royal `#212492` and Energy Yellow `#F5EC5A`.
 - No container image edits, no manual changes inside running containers, no destructive core modifications.
 - Persist all customization through Podman volumes or officially supported extension points.
 - Use rootful Podman 5.8.2 with crun; resource budget is 4 vCPU, ~6.4 GiB available RAM and 52 GiB free on `/`.
@@ -34,7 +34,7 @@ These rules come directly from `pt/domain.md` and the pre-deploy baseline in `in
 
 Source: `pt/unione.md`. Central files are the single source of truth; applications consume them via mounted volumes.
 
-- **Colours:** royal `#212492`, dark `#161869`, light `#3539B8`, yellow `#F5EC5A`, bright yellow `#FFD500`, cyan `#00AEEF`, magenta `#E6007E`, green `#45B649`, purple `#743BBD`; neutrals `#FFFFFF`, `#111111`, `#F6F8FC`, `#EEF2F9`, `#DCE3F0`, `#C2CCE0`, `#5E6882`, `#2A324B`, `#0F1429`.
+- **Colours:** royal/Jacksons Purple `#212492`, dark `#161869`, light `#3539B8`, Denim `#1067CE`, Energy Yellow `#F5EC5A`, bright yellow `#FFD500`, cyan `#00AEEF`, magenta `#E6007E`, green `#45B649`, purple `#743BBD`; neutrals `#FFFFFF`, `#111111`, `#F6F8FC`, `#EEF2F9`, `#DCE3F0`, `#C2CCE0`, `#5E6882`, `#2A324B`, `#0F1429`. Denim is used only where contrast passes: light-theme links/buttons on white (5.45:1) and accent gradients; dark-theme links remain cyan (7.20:1 on `#0F1429`) because Denim falls to 3.34:1 there.
 - **Semantic tokens:** background `#FFFFFF`, surface `#F6F8FC`, text `#0F1429`, muted text `#5E6882`, border `#DCE3F0`.
 - **Nextcloud variable bridge:** map `--color-primary`, `--color-primary-element`, `--color-primary-element-hover`, `--color-primary-element-text`, `--color-main-background`, `--color-background-hover`, `--color-main-text`, `--color-text-maxcontrast`, `--color-border` to the official tokens.
 - **Typography:** Plus Jakarta Sans for display, Inter for body, with declared fallbacks; licence and local hosting of font files must be confirmed before use.
@@ -115,3 +115,14 @@ Apply scripts under `/opt/unione/scripts/branding/` must:
 ## 9. Acceptance gate
 
 Work is complete only when `validation.md` passes for every hostname, every application, login/SSO flow, mobile web, legal notices, DNS/tunnel/Traefik routing and backup restore — with changes confined to `csphere.cloud` — and every remaining limitation is recorded in `exceptions.md`.
+
+## 10. Final Nextcloud theme and cleanup extension (2026-11-27)
+
+Two read-only extension directories are mounted into `unione-nextcloud`; no core file is patched:
+
+- `/opt/unione/branding/nextcloud-theme/unifique` → `/var/www/html/themes/unifique` — legacy theme with `defaults.php` plus `core/css/server.css` and `core/css/guest.css`. It implements light and dark themes via both OS preference and Nextcloud's `data-theme-dark` / `data-themes*=dark` body flags. Login uses the official LP-style deep-navy gradient (`#0F1429 → #161869 → #212492`) with yellow/cyan/Denim accents and a **solid** card (white + dark text in light mode, navy + white text in dark mode). The old translucent `.guest-box` grey card is explicitly overridden.
+- `/opt/unione/branding/nextcloud-apps/unifique_branding` → `/var/www/html/apps/unifique_branding` — minimal AGPL app that injects one script on `BeforeTemplateRenderedEvent`. It rewrites document titles, visible text and disallowed external links to `UNIFIQUE ONE` / `https://unifique.com.br`, while leaving AGPL/GNU legal links, security warnings and `csphere.cloud` links intact.
+
+`apply-nextcloud-branding.sh` enables the app, sets `theme=unifique`, clears `enforce_theme`, disables the four marketing/support apps (`firstrunwizard`, `nextcloud_announcements`, `support`, `survey_client`), and bumps `theming.cachebuster` so mounted CSS/JS is refetched. `stack/scripts/deploy.sh` and `stack/apps/nextcloud.container` mount both extension directories. `verify-nextcloud.sh` checks the theme files, app enablement, official URLs and marketing-app state.
+
+The profile/account popup is treated as a surface, not as header chrome: the blue header keeps white text, while the popup inverts to dark text on `#FFFFFF` in light mode (`#0F1429` on white = 18.22:1, Denim `#1067CE` links = 5.45:1) and white text on `#2A324B` in dark mode (`#FFFFFF` on `#2A324B` = 12.68:1, cyan `#00AEEF` links = 5.01:1). Header white text over the navy/royal/Denim gradient is 15.34:1, 12.12:1 and 5.45:1 respectively. All pass WCAG AA.

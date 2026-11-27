@@ -9,6 +9,8 @@ Network=unione.network
 NetworkAlias=nextcloud
 Volume=unione-nextcloud:/var/www/html
 Volume=/opt/unione/branding:/mnt/branding:ro
+Volume=/opt/unione/branding/nextcloud-theme/unifique:/var/www/html/themes/unifique:ro
+Volume=/opt/unione/branding/nextcloud-apps/unifique_branding:/var/www/html/apps/unifique_branding:ro
 EnvironmentFile=/opt/unione/stack/env/nextcloud.env
 
 [Service]
