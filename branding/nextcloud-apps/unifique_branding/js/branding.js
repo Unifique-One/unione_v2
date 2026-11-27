@@ -12,6 +12,11 @@
 	var SKIP_ELEMENTS = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1 };
 	var LOGIN_HEADLINE_SELECTOR = '[data-login-form-headline], .login-form__headline';
 	var LOGIN_HEADLINE_PREFIX = /faça login em|faca login em|log in to/i;
+	// The empty core guest header must not render above the login card.
+	var GUEST_HEADER_SELECTOR = '#header.header-guest';
+	// Guest footer must contain only the three official contact icons: no card,
+	// no descriptive text and no license notice.
+	var FOOTER_SELECTOR = 'footer.guest-box, #body-login footer';
 
 	function tidy(value) {
 		return String(value).replace(NAME, REPLACEMENT).replace(/\s+/g, ' ').trim();
@@ -57,7 +62,10 @@
 	function isAllowed(url) {
 		var host = url.hostname.toLowerCase();
 		return host === 'unifique.com.br' || host === 'lp.unifique.com.br' ||
-			host === 'csphere.cloud' || host === 'www.gnu.org';
+			host === 'csphere.cloud' || host === 'www.gnu.org' ||
+			// Official contact redirects published by unifique.com.br.
+			host === 'api.whatsapp.com' || host === 't.me' ||
+			host === 'email2.unifique.com.br';
 	}
 
 	function rewriteLink(link) {
@@ -120,6 +128,47 @@
 		}
 	}
 
+	// The guest footer is reduced to the official contact icons only: no card
+	// wrapper, no descriptive text and no license notice. The guard keeps the
+	// MutationObserver from re-processing the same node.
+	function cleanFooter(root) {
+		if (!root || !root.querySelectorAll) {
+			return;
+		}
+		var footers = root.querySelectorAll(FOOTER_SELECTOR);
+		for (var i = 0; i < footers.length; i++) {
+			var footer = footers[i];
+			if (footer.getAttribute && footer.getAttribute('data-unifique-footer')) {
+				continue;
+			}
+			var contacts = footer.querySelector('.unifique-contacts');
+			if (!contacts) {
+				footer.setAttribute('data-unifique-footer', 'empty');
+				footer.style.display = 'none';
+				continue;
+			}
+			while (footer.firstChild) {
+				footer.removeChild(footer.firstChild);
+			}
+			footer.setAttribute('data-unifique-footer', 'icons');
+			footer.appendChild(contacts);
+		}
+	}
+
+	// Remove the empty core guest header node instead of merely hiding it, so
+	// no logo chrome remains above the login card in the live DOM.
+	function removeGuestHeader(root) {
+		if (!root || !root.querySelectorAll) {
+			return;
+		}
+		var nodes = root.querySelectorAll(GUEST_HEADER_SELECTOR);
+		for (var i = 0; i < nodes.length; i++) {
+			if (nodes[i].parentNode) {
+				nodes[i].parentNode.removeChild(nodes[i]);
+			}
+		}
+	}
+
 	function apply() {
 		try {
 			if (document.title) {
@@ -132,6 +181,8 @@
 			}
 			walk(document.documentElement || document.body);
 			rewriteLoginHeadline(document.documentElement || document.body);
+			removeGuestHeader(document.documentElement || document.body);
+			cleanFooter(document.documentElement || document.body);
 		} catch (e) {
 			/* Defensive: never break rendering. */
 		}

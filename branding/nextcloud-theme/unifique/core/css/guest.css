@@ -259,14 +259,24 @@ body[data-page='login'],
 	padding: 0 !important;
 }
 
+/* Guest footer: no card and no description. defaults.php renders only the
+   three official contact icons; the legacy <p class="info"> copy is hidden
+   here so it never flashes before the cleanup script runs. */
+footer.guest-box,
 #body-login footer.guest-box {
-	background: var(--unifique-card-bg) !important;
+	background: transparent !important;
 	color: var(--unifique-card-text) !important;
-	border-color: var(--unifique-card-border) !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	padding: 12px 16px 20px !important;
+	text-align: center !important;
 }
 
-#body-login footer.guest-box a {
-	color: var(--unifique-link) !important;
+footer.guest-box p,
+footer.guest-box .info,
+#body-login footer.guest-box p,
+#body-login footer.guest-box .info {
+	display: none !important;
 }
 
 #body-login .guest-box p,
@@ -278,6 +288,60 @@ body[data-page='login'],
 .login-form label,
 .login-form p {
 	color: var(--unifique-card-text) !important;
+}
+
+/* The core guest header (<div id="header" class="header-guest"><div
+   class="logo"></div></div>) is removed entirely. No logo is rendered above
+   the login card: the official identity lives in the card and in the
+   theming app, not in this empty chrome element. */
+#header.header-guest,
+#header.header-guest .logo,
+#header.header-guest #nextcloud {
+	display: none !important;
+}
+
+#body-login header:has(> #header.header-guest) {
+	display: none !important;
+}
+
+/* Official contact icons: same assets and redirects as unifique.com.br.
+   Local copies keep them allowed by the login page CSP (img-src 'self'). */
+.unifique-contacts {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 10px !important;
+	vertical-align: middle !important;
+}
+
+.unifique-contacts a {
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	box-sizing: border-box !important;
+	width: 26px !important;
+	height: 26px !important;
+	border-radius: 6px !important;
+	background: var(--unifique-surface-alt) !important;
+	border: 1px solid var(--unifique-border) !important;
+}
+
+.unifique-contacts img {
+	display: block !important;
+	width: 18px !important;
+	height: 18px !important;
+	object-fit: contain !important;
+}
+
+@media (prefers-color-scheme: dark) {
+	html:root body:not([data-theme-light]):not([data-theme-default]) .unifique-contacts a {
+		background: #FFFFFF !important;
+	}
+}
+
+html:root body[data-theme-dark] .unifique-contacts a,
+html:root body[data-themes*='dark'] .unifique-contacts a {
+	background: #FFFFFF !important;
 }
 
 #login input[type='text'],
@@ -390,10 +454,7 @@ a[href*="newsletter.nextcloud.com"] {
 }
 
 .development-notice::after {
-	content: 'Código licenciado sob a AGPL';
-	display: block !important;
-	font-size: 13px !important;
-	color: var(--unifique-text) !important;
+	content: none !important;
 }
 
 .help-content__heading {

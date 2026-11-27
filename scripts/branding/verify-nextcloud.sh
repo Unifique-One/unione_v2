@@ -22,6 +22,13 @@ EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whit
 DISABLE_APPS=(firstrunwizard nextcloud_announcements support survey_client)
 OFFICIAL_URL='https://unifique.com.br'
 THEME_ID='unifique'
+CONTACT_ICONS=(contact-whatsapp.svg contact-telegram.svg contact-email.svg)
+CONTACT_ASSETS=(whatsapp-site-oficial.svg telegram-site-oficial.svg email-site-oficial.svg)
+CONTACT_REDIRECTS=(
+  'https://api.whatsapp.com/send/?phone=554733800800'
+  'https://t.me/UnifiqueOficialBot'
+  'https://email2.unifique.com.br/'
+)
 
 failures=0
 
@@ -125,6 +132,63 @@ done
 for f in appinfo/info.xml js/branding.js; do
   check_asset "/var/www/html/apps/unifique_branding/$f"
 done
+
+printf '\nGuest header and official contact footer:\n'
+for f in "${CONTACT_ICONS[@]}"; do
+  check_asset "/var/www/html/themes/${THEME_ID}/core/img/$f"
+done
+for i in 0 1 2; do
+  if cmp -s "/opt/unione/branding/assets/icons/${CONTACT_ASSETS[$i]}" \
+           "/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/img/${CONTACT_ICONS[$i]}"; then
+    ok "contact icon matches official source: ${CONTACT_ASSETS[$i]}"
+  else
+    bad "contact icon differs from official source: ${CONTACT_ASSETS[$i]}"
+  fi
+done
+
+login_html="$(podman exec "$NC_CONTAINER" sh -c 'curl -sS http://127.0.0.1/login' 2>/dev/null || true)"
+if [ -n "$login_html" ]; then
+  ok "login page HTML is readable"
+  if printf '%s' "$login_html" | grep -qi 'AGPL\|licenciado sob'; then
+    bad 'license notice still present in login footer/card'
+  else
+    ok 'no license notice in login footer/card'
+  fi
+  if printf '%s' "$login_html" | grep -q 'Suporte e administração'; then
+    bad 'footer description (Suporte e administração) still present'
+  else
+    ok 'footer description removed'
+  fi
+  for i in 0 1 2; do
+    if printf '%s' "$login_html" | grep -Fq "${CONTACT_ICONS[$i]}"; then
+      ok "footer renders official icon: ${CONTACT_ICONS[$i]}"
+    else
+      bad "footer does not render official icon: ${CONTACT_ICONS[$i]}"
+    fi
+    if printf '%s' "$login_html" | grep -Fq "${CONTACT_REDIRECTS[$i]}"; then
+      ok "footer uses official redirect: ${CONTACT_REDIRECTS[$i]}"
+    else
+      bad "footer redirect missing: ${CONTACT_REDIRECTS[$i]}"
+    fi
+  done
+else
+  bad 'could not read login page HTML'
+fi
+
+guest_css="/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/css/guest.css"
+if grep -q '#header.header-guest' "$guest_css" && grep -q 'display: none !important' "$guest_css"; then
+  ok 'guest header logo above the card is hidden'
+else
+  bad 'guest header logo is not hidden by guest.css'
+fi
+
+branding_js='/opt/unione/branding/nextcloud-apps/unifique_branding/js/branding.js'
+if grep -q 'removeGuestHeader' "$branding_js" && grep -q 'cleanFooter' "$branding_js" && \
+   grep -q 'api.whatsapp.com' "$branding_js" && grep -q 'email2.unifique.com.br' "$branding_js"; then
+  ok 'branding script removes guest header, preserves contact links and strips footer copy'
+else
+  bad 'branding script is missing header/contact/footer handling'
+fi
 
 printf '\nCalendar identity:\n'
 calendar_email="$(occ_read user:setting "$CALENDAR_USER" settings email || true)"

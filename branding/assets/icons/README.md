@@ -41,14 +41,27 @@ Preferir o script oficial do Lucide quando a aplicação permitir CDN. Em ambien
 o consumidor deve servir o Lucide localmente a partir de seu próprio bundle, preservando os mesmos
 nomes de ícone.
 
-## Ativos oficiais adicionados em 2026-11-27
+## Ícones de contato oficiais (2026-11-27)
 
-Fornecidos pelo proprietário da marca e baixados das URLs oficiais indicadas:
+Copias byte a byte dos SVGs publicados em `unifique.com.br`, usadas no rodapé do
+login do UNIFIQUE ONE. O tema serve cópias locais em
+`../nextcloud-theme/unifique/core/img/contact-*.svg` para satisfazer o CSP
+`img-src 'self'` da página de login.
+
+| Arquivo | URL de origem | Redirect oficial usado no link |
+| --- | --- | --- |
+| `whatsapp-site-oficial.svg` | `https://unifique.com.br/upload/mini-blocos/2024/11/WhatsApp.svg` | `https://api.whatsapp.com/send/?phone=554733800800&text=Ol%C3%A1%2C+visitei+o+site+e+preciso+de+ajuda.&type=phone_number&app_absent=0` |
+| `telegram-site-oficial.svg` | `https://unifique.com.br/upload/mini-blocos/2024/11/Telegram.svg` | `https://t.me/UnifiqueOficialBot` |
+| `email-site-oficial.svg` | `https://unifique.com.br/assets/imgs/svg/mail-primary.svg` | `https://email2.unifique.com.br/` |
+
+O ícone de e-mail é o envelope `mail-primary.svg` do próprio site; os ícones de
+WhatsApp e Telegram são os mesmos exibidos nos cartões de contato da home.
+Nenhum ícone de terceiros (incluindo thumbnails do Google) é usado no rodapé.
+
+## Outros ativos adicionados em 2026-11-27
 
 | Arquivo | Origem | Uso |
 | --- | --- | --- |
-| `whatsapp-oficial.png` | `encrypted-tbn0.gstatic.com/...AN9GcTCSxG-rje...` | ícone de contato WhatsApp |
-| `telegram-oficial.png` | `encrypted-tbn0.gstatic.com/...AN9GcTOSqVNihp...` | ícone de contato Telegram |
 | `hospedagem-sites-oficial.png` | `encrypted-tbn0.gstatic.com/...AN9GcTY9MvRs05...` | ícone de hospedagem de sites |
 | `unifique-one-azul.jpg` | `https://share.gemini.google/jWSvfArpG1sT` | ícone UNIFIQUE ONE para fundos claros |
 | `unifique-one-branco.jpg` | `https://share.gemini.google/QjSe4o7Ue1Tb` | ícone UNIFIQUE ONE para fundos escuros |
