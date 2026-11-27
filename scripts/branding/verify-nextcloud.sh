@@ -23,12 +23,13 @@ EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whit
 DISABLE_APPS=(firstrunwizard nextcloud_announcements support survey_client)
 OFFICIAL_URL='https://unifique.com.br'
 THEME_ID='unifique'
-CONTACT_ICONS=(contact-whatsapp.svg contact-telegram.svg contact-email.svg)
-CONTACT_ASSETS=(whatsapp-site-oficial.svg telegram-site-oficial.svg email-site-oficial.svg)
+CONTACT_ICONS=(contact-whatsapp.svg contact-telegram.svg contact-email.svg contact-area-cliente.png)
+CONTACT_ASSETS=(whatsapp-site-oficial.svg telegram-site-oficial.svg email-site-oficial.svg area-do-cliente-site-oficial.png)
 CONTACT_REDIRECTS=(
   'https://api.whatsapp.com/send/?phone=554733800800'
   'https://t.me/UnifiqueOficialBot'
   'https://email2.unifique.com.br/'
+  'https://servicos.unifique.com.br/'
 )
 
 failures=0
@@ -158,7 +159,7 @@ printf '\nGuest header and official contact footer:\n'
 for f in "${CONTACT_ICONS[@]}"; do
   check_asset "/var/www/html/themes/${THEME_ID}/core/img/$f"
 done
-for i in 0 1 2; do
+for i in 0 1 2 3; do
   if cmp -s "/opt/unione/branding/assets/icons/${CONTACT_ASSETS[$i]}" \
            "/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/img/${CONTACT_ICONS[$i]}"; then
     ok "contact icon matches official source: ${CONTACT_ASSETS[$i]}"
@@ -180,7 +181,7 @@ if [ -n "$login_html" ]; then
   else
     ok 'footer description removed'
   fi
-  for i in 0 1 2; do
+  for i in 0 1 2 3; do
     if printf '%s' "$login_html" | grep -Fq "${CONTACT_ICONS[$i]}"; then
       ok "footer renders official icon: ${CONTACT_ICONS[$i]}"
     else

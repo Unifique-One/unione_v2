@@ -5,7 +5,8 @@
  *
  * Runtime strings below are UNIFIQUE ONE branding only: no upstream product
  * naming and no upstream documentation/help URLs are returned. The three
- * contact destinations and icons are verbatim copies of unifique.com.br.
+ * contact destinations and the client-area destination are verbatim copies of
+ * unifique.com.br, as are their icons.
  */
 
 class OC_Theme {
@@ -22,6 +23,8 @@ class OC_Theme {
 	private const WHATSAPP_URL = 'https://api.whatsapp.com/send/?phone=554733800800&text=Ol%C3%A1%2C+visitei+o+site+e+preciso+de+ajuda.&type=phone_number&app_absent=0';
 	private const TELEGRAM_URL = 'https://t.me/UnifiqueOficialBot';
 	private const EMAIL_URL = 'https://email2.unifique.com.br/';
+	/** Official "Área do Cliente" redirect from the unifique.com.br home page. */
+	private const CLIENT_AREA_URL = 'https://servicos.unifique.com.br/';
 
 	public function getBaseUrl() {
 		return self::SITE;
@@ -58,7 +61,7 @@ class OC_Theme {
 	/**
 	 * Official contact icons served from the theme so the login page CSP
 	 * (img-src 'self') does not block them. The files are byte-identical
-	 * copies of the SVGs published by unifique.com.br.
+	 * copies of the assets published by unifique.com.br.
 	 */
 	private function contactLinks() {
 		$iconBase = (class_exists('OC') ? \OC::$WEBROOT : '') . '/themes/unifique/core/img/';
@@ -72,6 +75,9 @@ class OC_Theme {
 			. '</a>'
 			. '<a href="' . self::EMAIL_URL . '" target="_blank" rel="noopener noreferrer" aria-label="E-mail" title="E-mail">'
 			. '<img src="' . $iconBase . 'contact-email.svg" alt="E-mail" width="20" height="20">'
+			. '</a>'
+			. '<a href="' . self::CLIENT_AREA_URL . '" target="_blank" rel="noopener noreferrer" aria-label="Área do Cliente" title="Área do Cliente">'
+			. '<img src="' . $iconBase . 'contact-area-cliente.png" alt="Área do Cliente" width="20" height="20">'
 			. '</a>'
 			. '</span>';
 	}

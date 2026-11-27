@@ -65,7 +65,8 @@
 			host === 'csphere.cloud' || host === 'www.gnu.org' ||
 			// Official contact redirects published by unifique.com.br.
 			host === 'api.whatsapp.com' || host === 't.me' ||
-			host === 'email2.unifique.com.br';
+			host === 'email2.unifique.com.br' ||
+			host === 'servicos.unifique.com.br';
 	}
 
 	function rewriteLink(link) {

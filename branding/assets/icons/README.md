@@ -43,9 +43,9 @@ nomes de ícone.
 
 ## Ícones de contato oficiais (2026-11-27)
 
-Copias byte a byte dos SVGs publicados em `unifique.com.br`, usadas no rodapé do
-login do UNIFIQUE ONE. O tema serve cópias locais em
-`../nextcloud-theme/unifique/core/img/contact-*.svg` para satisfazer o CSP
+Copias byte a byte dos assets publicados em `unifique.com.br`, usadas no rodapé
+do login do UNIFIQUE ONE. O tema serve cópias locais em
+`../nextcloud-theme/unifique/core/img/contact-*` para satisfazer o CSP
 `img-src 'self'` da página de login.
 
 | Arquivo | URL de origem | Redirect oficial usado no link |
@@ -53,10 +53,13 @@ login do UNIFIQUE ONE. O tema serve cópias locais em
 | `whatsapp-site-oficial.svg` | `https://unifique.com.br/upload/mini-blocos/2024/11/WhatsApp.svg` | `https://api.whatsapp.com/send/?phone=554733800800&text=Ol%C3%A1%2C+visitei+o+site+e+preciso+de+ajuda.&type=phone_number&app_absent=0` |
 | `telegram-site-oficial.svg` | `https://unifique.com.br/upload/mini-blocos/2024/11/Telegram.svg` | `https://t.me/UnifiqueOficialBot` |
 | `email-site-oficial.svg` | `https://unifique.com.br/assets/imgs/svg/mail-primary.svg` | `https://email2.unifique.com.br/` |
+| `area-do-cliente-site-oficial.png` | `https://unifique.com.br/upload/mini-blocos/2024/11/%C3%81rea%20do%20Cliente.png` | `https://servicos.unifique.com.br/` |
 
 O ícone de e-mail é o envelope `mail-primary.svg` do próprio site; os ícones de
-WhatsApp e Telegram são os mesmos exibidos nos cartões de contato da home.
-Nenhum ícone de terceiros (incluindo thumbnails do Google) é usado no rodapé.
+WhatsApp e Telegram são os mesmos exibidos nos cartões de contato da home, e o
+ícone de área do cliente é o bloco “Área do cliente” da home, que o site aponta para
+`https://servicos.unifique.com.br/`. Nenhum ícone de terceiros (incluindo
+thumbnails do Google) é usado no rodapé.
 
 ## Outros ativos adicionados em 2026-11-27
 
