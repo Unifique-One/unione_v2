@@ -7,11 +7,13 @@ NC_CONTAINER="unione-nextcloud"
 BRANDING_MOUNT="/mnt/branding"
 
 NAME="UNIFIQUE ONE"
+PRODUCT_NAME="UNIFIQUE ONE"
 SLOGAN="Plataforma corporativa unificada"
 LOGO="${BRANDING_MOUNT}/assets/logos/unifique-one-light.svg"
-FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-32x32-01e518e661.png"
+FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 COLOR="#212492"
+BACKGROUND_COLOR="#F6F8FC"
 FONT="Plus Jakarta Sans"
 
 EXPECTED_APPS=(files photos calendar contacts spreed deck notes tasks forms whiteboard office mail assistant)
@@ -33,6 +35,29 @@ check_theming() {
     ok "theming.${key} = '${expected}'"
   else
     bad "theming.${key}: expected '${expected}', got '${actual:-<unset>}'"
+  fi
+}
+
+# Nextcloud 34 exposes uploaded images/colors only through theming:config.
+theming_config_output="$(occ_read theming:config || true)"
+check_theming_config() {
+  local key="$1" expected="$2" actual
+  actual="$(printf '%s\n' "$theming_config_output" | awk -v k="$key" '
+    $1 == "-" && $2 == k ":" { $1=""; $2=""; sub(/^[[:space:]]+/, ""); print; exit }
+  ')"
+  if [ "$actual" = "$expected" ]; then
+    ok "theming:config ${key} = '${expected}'"
+  else
+    bad "theming:config ${key}: expected '${expected}', got '${actual:-<unset>}'"
+  fi
+}
+
+check_asset() {
+  local path="$1"
+  if podman exec "$NC_CONTAINER" sh -c '[ -f "$1" ]' sh "$path" 2>/dev/null; then
+    ok "official asset present: ${path}"
+  else
+    bad "official asset missing: ${path}"
   fi
 }
 
@@ -61,20 +86,22 @@ else
 fi
 
 printf '\nTheming:\n'
-check_theming name "$NAME"
-check_theming slogan "$SLOGAN"
-check_theming logo "$LOGO"
-check_theming favicon "$FAVICON"
+check_theming_config name "$NAME"
+check_theming_config slogan "$SLOGAN"
+check_theming_config primary_color "$COLOR"
+check_theming_config color "$COLOR"
+check_theming_config background_color "$BACKGROUND_COLOR"
+check_theming_config background backgroundColor
+check_theming_config logo 'image/svg+xml'
+check_theming_config logoheader 'image/svg+xml'
+check_theming_config favicon 'image/vnd.microsoft.icon'
+check_theming productName "$PRODUCT_NAME"
 check_theming icon "$ICON"
-check_theming color "$COLOR"
 check_theming font "$FONT"
 
-background_value="$(occ_read config:app:get theming background || true)"
-if [ -z "$background_value" ]; then
-  skip "theming.background is not configured (optional asset)"
-else
-  ok "theming.background = '${background_value}'"
-fi
+check_asset "$LOGO"
+check_asset "$FAVICON"
+check_asset "$ICON"
 
 printf '\nEnabled apps:\n'
 app_list="$(occ_read app:list || true)"

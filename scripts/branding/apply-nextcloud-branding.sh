@@ -20,11 +20,12 @@ BRANDING_MOUNT="/mnt/branding"
 CUSTOM_THEME_CSS_DIR="/var/www/html/custom_apps/unifique-theme/css"
 
 NAME="UNIFIQUE ONE"
+PRODUCT_NAME="UNIFIQUE ONE"
 SLOGAN="Plataforma corporativa unificada"
 LOGO="${BRANDING_MOUNT}/assets/logos/unifique-one-light.svg"
-FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-32x32-01e518e661.png"
+FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
-BACKGROUND="${BRANDING_MOUNT}/assets/images/login-background.svg"
+BACKGROUND_COLOR="#F6F8FC"
 COLOR="#212492"
 FONT="Plus Jakarta Sans"
 
@@ -70,6 +71,17 @@ set_theming_value() {
   fi
 }
 
+# Nextcloud 34 stores uploaded theme images/colors through theming:config;
+# config:app:set alone does not register the MIME type and is ignored by the UI.
+theming_config_set() {
+  local key="$1" value="$2"
+  if occ theming:config "$key" "$value"; then
+    log "theming:config ${key} set to '${value}'"
+  else
+    warn "could not set theming:config ${key} to '${value}' (details in ${LOG_FILE})"
+  fi
+}
+
 app_list=""
 app_is_enabled() {
   printf '%s\n' "$app_list" | awk -v app="$1" '
@@ -98,19 +110,19 @@ log "container '${NC_CONTAINER}' is running"
 
 # --- Theming -----------------------------------------------------------------
 log "Applying theming with: podman exec -u www-data ${NC_CONTAINER} php occ ..."
-set_theming_value name "$NAME"
-set_theming_value slogan "$SLOGAN"
-set_theming_value logo "$LOGO"
-set_theming_value favicon "$FAVICON"
+theming_config_set name "$NAME"
+theming_config_set slogan "$SLOGAN"
+theming_config_set primary_color "$COLOR"
+theming_config_set color "$COLOR"
+theming_config_set background_color "$BACKGROUND_COLOR"
+theming_config_set background backgroundColor
+theming_config_set logo "$LOGO"
+theming_config_set logoheader "$LOGO"
+theming_config_set favicon "$FAVICON"
+# Keys not exposed by theming:config are set through the app configuration.
+set_theming_value productName "$PRODUCT_NAME"
 set_theming_value icon "$ICON"
-set_theming_value color "$COLOR"
 set_theming_value font "$FONT"
-
-if podman exec -u www-data "$NC_CONTAINER" sh -c '[ -f "$1" ]' sh "$BACKGROUND" >>"$LOG_FILE" 2>&1; then
-  set_theming_value background "$BACKGROUND"
-else
-  warn "background asset '${BACKGROUND}' is absent in the container; skipping theming.background"
-fi
 
 # --- Apps --------------------------------------------------------------------
 app_list="$(occ_output app:list || true)"
