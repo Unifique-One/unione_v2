@@ -1,0 +1,99 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * themes/responsive.css
+ *
+ * Media queries do documento oficial. CSS custom properties NÃO podem ser
+ * usadas como condição em @media; os literais abaixo reproduzem exatamente
+ * --unifique-breakpoint-compact (900px) e --unifique-breakpoint-small (680px),
+ * --unifique-sidebar-width-compact (220px) e --unifique-search-width-compact (170px).
+ * Importar por último para que sobrescreva os temas anteriores.
+ */
+
+/* ---------------------------------------------------------------------------
+ * ≤ 900px: sidebar compacta, busca reduzida, ícones sem rótulo na navegação
+ * ------------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  .nc-sidebar,
+  #app-navigation.unifique-sidebar {
+    width: 220px; /* --unifique-sidebar-width-compact */
+  }
+
+  .global-search input {
+    width: 170px; /* --unifique-search-width-compact */
+  }
+
+  .global-search input:focus {
+    width: var(--unifique-search-width);
+  }
+
+  .app-nav span {
+    display: none;
+  }
+
+  .nc-header {
+    padding: 0 var(--unifique-space-7);
+  }
+
+  .header-left {
+    gap: var(--unifique-space-7);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * ≤ 680px: sidebar recolhida, cards em coluna única, drawer em overlay
+ * ------------------------------------------------------------------------ */
+@media (max-width: 680px) {
+  .nc-sidebar,
+  #app-navigation.unifique-sidebar {
+    display: none;
+  }
+
+  .ecosystem-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .content-toolbar,
+  .content-body {
+    padding-left: var(--unifique-space-7);
+    padding-right: var(--unifique-space-7);
+  }
+
+  .global-search input,
+  .global-search input:focus {
+    width: 100%;
+  }
+
+  .nc-details-drawer,
+  #app-sidebar.unifique-drawer {
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(100%, var(--unifique-drawer-width));
+    z-index: var(--unifique-z-modal);
+    box-shadow: var(--unifique-shadow-lg);
+  }
+
+  .brand-logo img,
+  .brand-logo svg {
+    width: 120px;
+  }
+
+  .unifique-login__panel {
+    padding: var(--unifique-space-10) var(--unifique-space-7);
+  }
+
+  .app-nav-item {
+    padding: var(--unifique-space-3);
+  }
+}
+
+/* Preferência por movimento reduzido: transições documentadas são desligadas,
+ * sem alterar cores, tipografia ou raios oficiais. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,501 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * themes/components.css
+ *
+ * Botões, cards, tabelas, tags, campos, modais e toasts.
+ * Cores, raios e sombras exclusivamente dos tokens oficiais.
+ */
+
+/* Botões ------------------------------------------------------------------- */
+.btn-primary,
+.unifique-button--primary {
+  background: var(--unifique-yellow);
+  color: var(--unifique-royal-dark);
+  border: 1px solid var(--unifique-yellow);
+  border-radius: var(--unifique-radius-pill);
+  padding: var(--unifique-space-4) var(--unifique-space-9);
+  font-family: var(--unifique-font-display);
+  font-weight: var(--unifique-font-weight-extrabold);
+  font-size: var(--unifique-font-size-base);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--unifique-space-3);
+  cursor: pointer;
+  transition: all var(--unifique-transition-base);
+  box-shadow: 0 3px 10px var(--unifique-yellow-alpha-35);
+}
+
+.btn-primary:hover,
+.unifique-button--primary:hover {
+  background: var(--unifique-yellow-bright);
+  border-color: var(--unifique-yellow-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px var(--unifique-yellow-alpha-50);
+}
+
+.btn-royal,
+.unifique-button--royal {
+  background: var(--unifique-royal);
+  color: var(--unifique-white);
+  border: 1px solid var(--unifique-royal);
+  border-radius: var(--unifique-radius-pill);
+  padding: var(--unifique-space-4) var(--unifique-space-8);
+  font-family: var(--unifique-font-display);
+  font-weight: var(--unifique-font-weight-bold);
+  font-size: var(--unifique-font-size-base);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--unifique-space-3);
+  cursor: pointer;
+  transition: all var(--unifique-transition-base);
+}
+
+.btn-royal:hover,
+.unifique-button--royal:hover {
+  background: var(--unifique-royal-dark);
+}
+
+.btn-secondary,
+.unifique-button--secondary {
+  background: var(--unifique-white);
+  color: var(--unifique-royal);
+  border: 1.5px solid var(--unifique-royal);
+  border-radius: var(--unifique-radius-pill);
+  padding: 9px var(--unifique-space-7);
+  font-family: var(--unifique-font-display);
+  font-weight: var(--unifique-font-weight-bold);
+  font-size: var(--unifique-font-size-base);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--unifique-space-3);
+  cursor: pointer;
+  transition: all var(--unifique-transition-base);
+}
+
+.btn-secondary:hover,
+.unifique-button--secondary:hover {
+  background: var(--unifique-royal);
+  color: var(--unifique-white);
+}
+
+/* Alternador de visualização ---------------------------------------------- */
+.view-toggle {
+  display: flex;
+  background: var(--unifique-gray-100);
+  padding: var(--unifique-space-1);
+  border-radius: var(--unifique-radius-pill);
+  border: 1px solid var(--unifique-border);
+}
+
+.view-toggle button {
+  border: none;
+  background: transparent;
+  padding: var(--unifique-space-2) var(--unifique-space-4);
+  border-radius: var(--unifique-radius-pill);
+  color: var(--unifique-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.view-toggle button.active {
+  background: var(--unifique-royal);
+  color: var(--unifique-white);
+  box-shadow: var(--unifique-shadow-sm);
+}
+
+/* Cards do ecossistema ----------------------------------------------------- */
+.content-body {
+  padding: var(--unifique-space-11) var(--unifique-space-13);
+  display: flex;
+  flex-direction: column;
+  gap: var(--unifique-space-11);
+}
+
+.ecosystem-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--unifique-grid-min-width), 1fr));
+  gap: var(--unifique-space-7);
+}
+
+.unifique-card {
+  background: var(--unifique-white);
+  border: 1px solid var(--unifique-border);
+  border-radius: var(--unifique-radius-lg);
+  box-shadow: var(--unifique-shadow-sm);
+  padding: var(--unifique-space-8) var(--unifique-space-9);
+  transition: all var(--unifique-transition-base);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.unifique-card:hover {
+  box-shadow: var(--unifique-shadow-md);
+  border-color: var(--unifique-royal);
+  transform: translateY(-2px);
+}
+
+.product-accent-drive { border-top: 4px solid var(--unifique-royal); }
+.product-accent-office { border-top: 4px solid var(--unifique-cyan); }
+.product-accent-meet { border-top: 4px solid var(--unifique-yellow-bright); }
+.product-accent-security { border-top: 4px solid var(--unifique-green); }
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--unifique-space-5);
+}
+
+.card-icon {
+  width: var(--unifique-card-icon-size);
+  height: var(--unifique-card-icon-size);
+  border-radius: var(--unifique-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-title {
+  font-family: var(--unifique-font-display);
+  font-size: var(--unifique-font-size-2xl);
+  font-weight: var(--unifique-font-weight-extrabold);
+  color: var(--unifique-royal-dark);
+  margin-bottom: var(--unifique-space-1);
+}
+
+.card-desc {
+  font-size: var(--unifique-font-size-sm);
+  color: var(--unifique-text-muted);
+  line-height: var(--unifique-line-height-body);
+}
+
+/* Indicador de armazenamento ---------------------------------------------- */
+.storage-card {
+  background: linear-gradient(145deg, var(--unifique-royal) 0%, var(--unifique-royal-dark) 100%);
+  color: var(--unifique-white);
+  border-radius: var(--unifique-radius-lg);
+  padding: var(--unifique-space-7);
+  margin-top: var(--unifique-space-7);
+  box-shadow: var(--unifique-shadow-md);
+}
+
+.storage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--unifique-font-size-xs);
+  font-weight: var(--unifique-font-weight-bold);
+  margin-bottom: var(--unifique-space-4);
+}
+
+.storage-header .usage {
+  color: var(--unifique-yellow);
+}
+
+.storage-bar-bg {
+  height: var(--unifique-storage-bar-height);
+  background: var(--unifique-white-alpha-20);
+  border-radius: var(--unifique-radius-pill);
+  overflow: hidden;
+  margin-bottom: 9px;
+}
+
+.storage-bar-fill {
+  height: 100%;
+  width: 34%;
+  background: linear-gradient(90deg, var(--unifique-cyan), var(--unifique-yellow));
+  border-radius: var(--unifique-radius-pill);
+}
+
+.storage-meta {
+  font-size: var(--unifique-font-size-2xs);
+  color: var(--unifique-white-alpha-82);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Tabela de arquivos ------------------------------------------------------- */
+.files-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--unifique-space-5);
+}
+
+.files-section-title {
+  font-family: var(--unifique-font-display);
+  font-size: var(--unifique-font-size-sm);
+  font-weight: var(--unifique-font-weight-extrabold);
+  color: var(--unifique-royal);
+  text-transform: uppercase;
+  letter-spacing: var(--unifique-letter-spacing-wide);
+}
+
+.files-table-wrapper {
+  background: var(--unifique-white);
+  border: 1px solid var(--unifique-border);
+  border-radius: var(--unifique-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--unifique-shadow-sm);
+}
+
+table.nc-files-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+table.nc-files-table th {
+  background: var(--unifique-gray-100);
+  padding: 13px var(--unifique-space-8);
+  font-family: var(--unifique-font-display);
+  font-size: var(--unifique-font-size-xs);
+  font-weight: var(--unifique-font-weight-bold);
+  color: var(--unifique-royal-dark);
+  border-bottom: 1px solid var(--unifique-border);
+  user-select: none;
+}
+
+table.nc-files-table td {
+  padding: 13px var(--unifique-space-8);
+  font-size: var(--unifique-font-size-base);
+  border-bottom: 1px solid var(--unifique-gray-100);
+  color: var(--unifique-text);
+  vertical-align: middle;
+}
+
+table.nc-files-table tr:last-child td {
+  border-bottom: none;
+}
+
+table.nc-files-table tbody tr {
+  transition: background var(--unifique-transition-fast);
+  cursor: pointer;
+}
+
+table.nc-files-table tbody tr:hover {
+  background: var(--unifique-royal-alpha-04);
+}
+
+table.nc-files-table tbody tr.selected {
+  background: var(--unifique-royal-alpha-08);
+}
+
+.file-name-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--unifique-space-5);
+  font-weight: var(--unifique-font-weight-semibold);
+  color: var(--unifique-gray-900);
+}
+
+.file-icon-box {
+  width: var(--unifique-file-icon-size);
+  height: var(--unifique-file-icon-size);
+  border-radius: var(--unifique-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Tabelas e grades usam as cores oficiais por tipo de arquivo */
+.file-type-folder { background: var(--unifique-royal-alpha-12); color: var(--unifique-royal); }
+.file-type-sheet { background: var(--unifique-green-alpha-15); color: var(--unifique-green); }
+.file-type-slides { background: var(--unifique-yellow-alpha-45); color: var(--unifique-royal-dark); }
+.file-type-pdf { background: var(--unifique-magenta-alpha-12); color: var(--unifique-magenta); }
+.file-type-doc { background: var(--unifique-cyan-alpha-14); color: var(--unifique-cyan); }
+
+/* Tags -------------------------------------------------------------------- */
+.tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--unifique-space-1);
+  padding: var(--unifique-space-1) var(--unifique-space-4);
+  border-radius: var(--unifique-radius-pill);
+  font-size: var(--unifique-font-size-2xs);
+  font-weight: var(--unifique-font-weight-bold);
+}
+
+.tag-shared {
+  background: var(--unifique-cyan-alpha-14);
+  color: var(--unifique-royal);
+}
+
+.tag-encrypted {
+  background: var(--unifique-green-alpha-15);
+  color: var(--unifique-green);
+}
+
+.tag-energy {
+  background: var(--unifique-yellow);
+  color: var(--unifique-royal-dark);
+}
+
+.tag-neutral {
+  background: var(--unifique-gray-100);
+  color: var(--unifique-royal-dark);
+}
+
+.action-icon-btn {
+  width: var(--unifique-action-icon-size);
+  height: var(--unifique-action-icon-size);
+  border-radius: var(--unifique-radius-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--unifique-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--unifique-transition-fast);
+}
+
+.action-icon-btn:hover {
+  background: var(--unifique-white);
+  border-color: var(--unifique-royal);
+  color: var(--unifique-royal);
+}
+
+/* No documento original a estrela usava um âmbar fora da paleta; aqui usa-se
+ * o amarelo vivo oficial para permanecer dentro dos tokens. */
+.action-icon-btn.starred {
+  color: var(--unifique-yellow-bright);
+}
+
+.action-icon-btn.starred svg,
+.action-icon-btn.starred i {
+  fill: var(--unifique-yellow-bright);
+}
+
+/* Grade de arquivos -------------------------------------------------------- */
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--unifique-files-grid-min-width), 1fr));
+  gap: var(--unifique-space-7);
+}
+
+.file-grid-card {
+  background: var(--unifique-white);
+  border: 1px solid var(--unifique-border);
+  border-radius: var(--unifique-radius-lg);
+  padding: var(--unifique-space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--unifique-space-5);
+  cursor: pointer;
+  transition: all var(--unifique-transition-fast);
+}
+
+.file-grid-card:hover {
+  border-color: var(--unifique-royal);
+  box-shadow: var(--unifique-shadow-md);
+}
+
+.file-grid-card .file-title {
+  font-size: var(--unifique-font-size-lg);
+  font-weight: var(--unifique-font-weight-bold);
+  color: var(--unifique-royal-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-grid-card .file-meta {
+  font-size: var(--unifique-font-size-xs);
+  color: var(--unifique-text-muted);
+  margin-top: var(--unifique-space-1);
+}
+
+/* Campos ------------------------------------------------------------------- */
+.unifique-input,
+input.unifique-input,
+textarea.unifique-input {
+  background: var(--unifique-white);
+  color: var(--unifique-text);
+  border: 1.5px solid var(--unifique-gray-300);
+  border-radius: var(--unifique-radius-pill);
+  padding: var(--unifique-space-4) var(--unifique-space-7);
+  font-size: var(--unifique-font-size-base);
+  width: 100%;
+  font-family: var(--unifique-font-family);
+}
+
+.unifique-input:focus {
+  outline: none;
+  border-color: var(--unifique-royal);
+  box-shadow: var(--unifique-focus-ring);
+}
+
+.unifique-input::placeholder {
+  color: var(--unifique-text-muted);
+}
+
+/* Modais ------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--unifique-gray900-alpha-60);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--unifique-z-modal);
+  padding: var(--unifique-space-9);
+}
+
+.modal-backdrop.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--unifique-white);
+  border-radius: var(--unifique-radius-xl);
+  box-shadow: var(--unifique-shadow-lg);
+  width: 100%;
+  max-width: var(--unifique-modal-max-width);
+  padding: var(--unifique-space-12);
+  border: 1px solid var(--unifique-border);
+  animation: unifique-pop-in var(--unifique-transition-modal);
+}
+
+.modal-box--tokens {
+  max-width: var(--unifique-modal-token-max-width);
+}
+
+@keyframes unifique-pop-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Toasts ------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: var(--unifique-space-10);
+  right: var(--unifique-space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--unifique-space-4);
+  z-index: var(--unifique-z-toast);
+}
+
+.toast {
+  background: var(--unifique-royal-dark);
+  color: var(--unifique-white);
+  padding: 13px var(--unifique-space-8);
+  border-radius: var(--unifique-radius-pill);
+  font-size: var(--unifique-font-size-md);
+  font-weight: var(--unifique-font-weight-semibold);
+  box-shadow: var(--unifique-shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--unifique-space-4);
+  border: 1px solid var(--unifique-yellow-alpha-40);
+}
+
+.toast .toast-icon {
+  color: var(--unifique-yellow);
+  flex-shrink: 0;
+}

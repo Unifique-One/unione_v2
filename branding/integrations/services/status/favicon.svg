@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none" role="img" aria-labelledby="uo-fav-title uo-fav-desc">
+  <title id="uo-fav-title">UNIFIQUE ONE</title>
+  <desc id="uo-fav-desc">Favicon derivado do wordmark oficial Unifique: fundo azul royal, texto branco e os dois pontos circulares oficiais amarelo e ciano.</desc>
+
+  <!--
+    Derivação do SVG oficial em /opt/unione/pt/unione.md (linhas 976-982).
+    - Fundo: #212492 (Azul Royal Oficial) com raio 16px (raio lg oficial).
+    - Texto: mesmo elemento <text> do wordmark oficial, escalado para caber no quadrado.
+    - Pontos: mesmas circunferências oficiais (#F5EC5A e #00AEEF), reposicionadas e com
+      raio ampliado apenas para permanecerem legíveis em 16x16 px. Nenhum novo desenho.
+  -->
+  <rect width="64" height="64" rx="16" fill="#212492"/>
+  <g transform="translate(4 22) scale(0.34)">
+    <text x="2" y="31" fill="#FFFFFF" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="29" letter-spacing="-0.04em">unıfıque</text>
+  </g>
+  <circle cx="19" cy="24.9" r="2.6" fill="#F5EC5A"/>
+  <circle cx="28.2" cy="24.9" r="2.6" fill="#00AEEF"/>
+</svg>

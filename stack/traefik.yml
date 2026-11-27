@@ -1,0 +1,16 @@
+# UNIFIQUE ONE - static Traefik configuration.
+# Only the HTTP entrypoint exists; there is no public dashboard or API exposure.
+entryPoints:
+  web:
+    address: ":80"
+
+providers:
+  file:
+    filename: /etc/traefik/services.yml
+    watch: true
+
+api:
+  dashboard: false
+
+log:
+  level: INFO

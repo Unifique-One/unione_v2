@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="177" height="34" viewBox="0 0 218 42" fill="none" role="img" aria-labelledby="uo-title uo-desc">
+  <title id="uo-title">UNIFIQUE ONE</title>
+  <desc id="uo-desc">Wordmark oficial Unifique em branco com os dois pontos circulares oficiais (#F5EC5A e #00AEEF) e o rótulo ONE. Versão para fundos escuros.</desc>
+
+  <!--
+    Fonte: wordmark SVG inline oficial em /opt/unione/pt/unione.md (linhas 976-982).
+    O wordmark "unıfıque" (i sem ponto) e as duas circunferências são preservados
+    exatamente como no documento oficial. O rótulo "ONE" reaproveita o componente
+    .brand-badge documentado em unione.md (pílula #F5EC5A, texto #161869, 800, 11px,
+    letter-spacing 0.05em), substituindo apenas o rótulo "Cloud" pelo nome do produto.
+    Nenhum traço novo foi desenhado.
+  -->
+  <text x="2" y="31" fill="#FFFFFF" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="29" letter-spacing="-0.04em">unıfıque</text>
+  <circle cx="44.2" cy="8.5" r="3.2" fill="#F5EC5A"/>
+  <circle cx="71.2" cy="8.5" r="3.2" fill="#00AEEF"/>
+
+  <g transform="translate(170 12)">
+    <rect x="0" y="0" width="42" height="19" rx="9999" fill="#F5EC5A"/>
+    <text x="21" y="13.5" fill="#161869" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="11" letter-spacing="0.05em">ONE</text>
+  </g>
+</svg>

@@ -1,0 +1,109 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * themes/global.css
+ *
+ * Base global + variáveis nativas compatíveis com o Nextcloud.
+ * Importar este arquivo (ou design-tokens.css) antes de qualquer outro tema.
+ */
+
+@import url("../tokens/design-tokens.css");
+
+/* ---------------------------------------------------------------------------
+ * Overrides nativos do Nextcloud — lista oficial em /opt/unione/pt/unione.md
+ * O Nextcloud (e apps que respeitam o theming) lê estas variáveis.
+ * Valores sempre apontam para tokens UNIFIQUE ONE.
+ * ------------------------------------------------------------------------ */
+:root {
+  --color-primary: var(--unifique-royal);
+  --color-primary-element: var(--unifique-royal);
+  --color-primary-element-hover: var(--unifique-royal-dark);
+  --color-primary-element-text: var(--unifique-white);
+  --color-main-background: var(--unifique-background);
+  --color-background-hover: var(--unifique-gray-100);
+  --color-main-text: var(--unifique-text);
+  --color-text-maxcontrast: var(--unifique-text-muted);
+  --color-border: var(--unifique-border);
+}
+
+/* ---------------------------------------------------------------------------
+ * Reset documentado
+ * ------------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--unifique-surface);
+}
+
+body {
+  font-family: var(--unifique-font-family);
+  font-size: var(--unifique-font-size-base);
+  color: var(--unifique-text);
+  background: var(--unifique-surface);
+  -webkit-font-smoothing: var(--unifique-font-smoothing);
+}
+
+/* Shell de aplicação em tela cheia (layout do documento oficial).
+ * Não aplicar a páginas que precisam de rolagem natural do documento. */
+body.unifique-shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+::selection {
+  background: var(--unifique-yellow);
+  color: var(--unifique-royal-dark);
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--unifique-yellow-bright);
+  outline-offset: 2px;
+}
+
+/* Títulos seguem a fonte de display oficial */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--unifique-font-display);
+  color: var(--unifique-royal-dark);
+  line-height: var(--unifique-line-height-tight);
+}
+
+a {
+  color: var(--unifique-royal);
+}
+
+/* ---------------------------------------------------------------------------
+ * Ajustes de compatibilidade com o Nextcloud
+ * Regras de baixa especificidade: não removem avisos técnicos, créditos ou
+ * informações de licença; apenas alinham superfícies e texto ao tema oficial.
+ * ------------------------------------------------------------------------ */
+#header,
+#app-navigation,
+#app-content,
+#content {
+  color: var(--unifique-text);
+}
+
+#app-content,
+#content {
+  background: var(--unifique-surface);
+}
+
+.nextcloud,
+[data-theming] {
+  --color-primary: var(--unifique-royal);
+  --color-primary-element: var(--unifique-royal);
+  --color-primary-element-hover: var(--unifique-royal-dark);
+  --color-primary-element-text: var(--unifique-white);
+  --color-main-background: var(--unifique-background);
+  --color-background-hover: var(--unifique-gray-100);
+  --color-main-text: var(--unifique-text);
+  --color-text-maxcontrast: var(--unifique-text-muted);
+  --color-border: var(--unifique-border);
+}

@@ -1,0 +1,17 @@
+[Unit]
+Description=UNIFIQUE ONE PostgreSQL
+After=network-online.target unione-network.service
+
+[Container]
+Image=docker.io/library/postgres:16-alpine
+ContainerName=unione-postgres
+Network=unione.network
+NetworkAlias=postgres
+Volume=unione-postgres:/var/lib/postgresql/data
+EnvironmentFile=/opt/unione/stack/env/nextcloud.env
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

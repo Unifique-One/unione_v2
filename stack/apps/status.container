@@ -1,0 +1,16 @@
+[Unit]
+Description=UNIFIQUE ONE status page
+After=network-online.target unione-network.service
+
+[Container]
+Image=docker.io/library/nginx:alpine
+ContainerName=unione-status
+Network=unione.network
+NetworkAlias=status
+Volume=/opt/unione/branding/integrations/services/status:/usr/share/nginx/html:ro
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

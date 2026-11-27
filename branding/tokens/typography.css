@@ -1,0 +1,50 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * tokens/typography.css
+ *
+ * Fonte única: /opt/unione/pt/unione.md ("Tipografia" e os tamanhos usados
+ * nos componentes oficiais). Apenas Plus Jakarta Sans e Inter.
+ */
+
+:root {
+  /* Famílias oficiais */
+  --unifique-font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  --unifique-font-family: "Inter", "Plus Jakarta Sans", Arial, sans-serif;
+
+  /* Pesos (Google Fonts: Inter 400-800 / Plus Jakarta Sans 500-800) */
+  --unifique-font-weight-regular: 400;
+  --unifique-font-weight-medium: 500;
+  --unifique-font-weight-semibold: 600;
+  --unifique-font-weight-bold: 700;
+  --unifique-font-weight-extrabold: 800;
+
+  /* Escala de tamanhos documentada no componentes oficiais
+   * 2xs=11px (badges, labels, tags) · xs=12px (th, meta) · sm=12.5px (descrições)
+   * md=13px (busca, toast) · base=13.5px (corpo, botões, links) · lg=14px ·
+   * xl=15px · 2xl=15.5px (título de card) · 3xl=16px (breadcrumbs) ·
+   * 4xl=18px (modal) · wordmark=29px (SVG oficial) */
+  --unifique-font-size-2xs: 11px;
+  --unifique-font-size-xs: 12px;
+  --unifique-font-size-sm: 12.5px;
+  --unifique-font-size-md: 13px;
+  --unifique-font-size-base: 13.5px;
+  --unifique-font-size-lg: 14px;
+  --unifique-font-size-xl: 15px;
+  --unifique-font-size-2xl: 15.5px;
+  --unifique-font-size-3xl: 16px;
+  --unifique-font-size-4xl: 18px;
+  --unifique-font-size-wordmark: 29px;
+
+  /* Altura de linha documentada (card-desc 1.45) */
+  --unifique-line-height-body: 1.45;
+  --unifique-line-height-normal: 1.5;
+  --unifique-line-height-tight: 1.2;
+
+  /* Tracking documentado (wordmark -0.04em, badge 0.05em, labels 0.06em) */
+  --unifique-letter-spacing-tight: -0.04em;
+  --unifique-letter-spacing-wide: 0.05em;
+  --unifique-letter-spacing-wider: 0.06em;
+
+  /* Antialiasing oficial */
+  --unifique-font-smoothing: antialiased;
+}

@@ -1,0 +1,19 @@
+# Credentials and operational secrets — never version these.
+/secrets/
+/backups/
+/pt/domain.md
+/stack/env/
+/stack/config/coturn.conf
+*.pem
+*.key
+*.htpasswd
+*.password
+*.token
+*.tunnel.id
+tunnel.env
+
+# Runtime logs and local scratch assets.
+*.log
+/img/
+__pycache__/
+*.pyc

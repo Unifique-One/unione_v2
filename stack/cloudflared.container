@@ -1,0 +1,21 @@
+[Unit]
+Description=UNIFIQUE ONE Cloudflare Tunnel connector
+After=network-online.target unione-network.service traefik.service
+Wants=network-online.target
+
+[Container]
+Image=docker.io/cloudflare/cloudflared:latest
+ContainerName=unione-cloudflared
+Network=unione.network
+NetworkAlias=cloudflared
+Volume=/root/.cloudflared:/etc/cloudflared:ro
+Volume=/opt/unione/secrets/cloudflare.tunnel.id:/run/secrets/cloudflare.tunnel.id:ro
+Exec=tunnel --no-autoupdate --config /etc/cloudflared/config.yml run
+
+[Service]
+Restart=always
+# Fail fast with a clear message if the authoritative tunnel ID file is absent.
+ExecStartPre=/usr/bin/test -s /opt/unione/secrets/cloudflare.tunnel.id
+
+[Install]
+WantedBy=multi-user.target

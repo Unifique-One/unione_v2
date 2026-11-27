@@ -1,0 +1,32 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * tokens/design-tokens.css
+ *
+ * Ponto único de entrada para consumidores. Consolida cores, tipografia e
+ * espaçamento. Ordem de importação preservada: cores → tipografia → spacing.
+ *
+ * Produto:  UNIFIQUE ONE
+ * Domínio canônico: csphere.cloud
+ * Fonte oficial: /opt/unione/pt/unione.md
+ */
+
+@import url("./colors.css");
+@import url("./typography.css");
+@import url("./spacing.css");
+
+:root {
+  /* Aliases de conveniência — todos apontam para tokens oficiais */
+  --unifique-accent: var(--unifique-yellow);
+  --unifique-accent-hover: var(--unifique-yellow-bright);
+  --unifique-surface-raised: var(--unifique-white);
+  --unifique-surface-sunken: var(--unifique-gray-50);
+  --unifique-on-accent: var(--unifique-royal-dark);
+  --unifique-on-royal: var(--unifique-white);
+
+  /* Metadados de identidade (consumidos por ferramentas de build/documentação) */
+  --unifique-product-name: "UNIFIQUE ONE";
+  --unifique-canonical-domain: "csphere.cloud";
+}
+
+/* Os overrides nativos do Nextcloud (--color-*) vivem em themes/global.css
+ * para manter os tokens puros e permitir que outros consumidores os ignorem. */

@@ -1,0 +1,6 @@
+[Unit]
+Description=UNIFIQUE ONE shared Podman network
+
+[Network]
+NetworkName=unione
+Driver=bridge

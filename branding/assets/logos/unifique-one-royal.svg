@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="177" height="34" viewBox="0 0 218 42" fill="none" role="img" aria-labelledby="uo-title uo-desc">
+  <title id="uo-title">UNIFIQUE ONE</title>
+  <desc id="uo-desc">Wordmark oficial Unifique em azul royal (#212492) com os dois pontos circulares oficiais (#F5EC5A e #00AEEF) e o rótulo ONE. Versão para fundos claros.</desc>
+
+  <!--
+    Fonte: wordmark SVG inline oficial em /opt/unione/pt/unione.md (linhas 976-982).
+    Mesma geometria da variante light; única alteração no wordmark é o fill do texto,
+    trocado de #FFFFFF para #212492 (Azul Royal Oficial documentado).
+    As circunferências oficiais mantêm #F5EC5A e #00AEEF.
+    O rótulo "ONE" reaproveita o .brand-badge documentado em unione.md.
+    Nenhum traço novo foi desenhado.
+  -->
+  <text x="2" y="31" fill="#212492" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="29" letter-spacing="-0.04em">unıfıque</text>
+  <circle cx="44.2" cy="8.5" r="3.2" fill="#F5EC5A"/>
+  <circle cx="71.2" cy="8.5" r="3.2" fill="#00AEEF"/>
+
+  <g transform="translate(170 12)">
+    <rect x="0" y="0" width="42" height="19" rx="9999" fill="#F5EC5A"/>
+    <text x="21" y="13.5" fill="#161869" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="11" letter-spacing="0.05em">ONE</text>
+  </g>
+</svg>

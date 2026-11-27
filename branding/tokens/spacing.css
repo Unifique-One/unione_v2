@@ -1,0 +1,80 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * tokens/spacing.css
+ *
+ * Fonte única: /opt/unione/pt/unione.md ("Formas & Bordas Arredondadas",
+ * "Sombras Suaves" e os valores de espaçamento/dimensão dos componentes).
+ */
+
+:root {
+  /* Raios oficiais */
+  --unifique-radius-sm: 6px;
+  --unifique-radius-md: 10px;
+  --unifique-radius-lg: 16px;
+  --unifique-radius-xl: 22px;
+  --unifique-radius-pill: 9999px;
+
+  /* Sombras suaves oficiais */
+  --unifique-shadow-sm: 0 2px 6px rgba(33, 36, 146, 0.06);
+  --unifique-shadow-md: 0 6px 18px rgba(33, 36, 146, 0.10);
+  --unifique-shadow-lg: 0 14px 36px rgba(22, 24, 105, 0.16);
+
+  /* Escala de espaçamento: valores efetivamente usados no documento oficial */
+  --unifique-space-1: 4px;
+  --unifique-space-2: 6px;
+  --unifique-space-3: 8px;
+  --unifique-space-4: 10px;
+  --unifique-space-5: 12px;
+  --unifique-space-6: 14px;
+  --unifique-space-7: 16px;
+  --unifique-space-8: 18px;
+  --unifique-space-9: 20px;
+  --unifique-space-10: 22px;
+  --unifique-space-11: 24px;
+  --unifique-space-12: 26px;
+  --unifique-space-13: 28px;
+  --unifique-space-14: 38px;
+  --unifique-space-15: 42px;
+
+  /* Dimensões dos componentes oficiais */
+  --unifique-header-height: 66px;
+  --unifique-header-border-width: 3px;
+  --unifique-sidebar-width: 264px;
+  --unifique-sidebar-width-compact: 220px;
+  --unifique-drawer-width: 340px;
+  --unifique-logo-width: 134px;
+  --unifique-logo-height: 34px;
+  --unifique-search-width: 245px;
+  --unifique-search-width-focus: 295px;
+  --unifique-search-width-compact: 170px;
+  --unifique-icon-btn-size: 38px;
+  --unifique-action-icon-size: 32px;
+  --unifique-avatar-size: 30px;
+  --unifique-card-icon-size: 40px;
+  --unifique-file-icon-size: 36px;
+  --unifique-storage-bar-height: 8px;
+  --unifique-modal-max-width: 470px;
+  --unifique-modal-token-max-width: 520px;
+  --unifique-grid-min-width: 225px;
+  --unifique-files-grid-min-width: 215px;
+
+  /* Breakpoints de referência (CSS vars NÃO funcionam em @media;
+   * os literais em responsive.css reproduzem exatamente estes valores) */
+  --unifique-breakpoint-compact: 900px;
+  --unifique-breakpoint-small: 680px;
+
+  /* Camadas documentadas */
+  --unifique-z-toolbar: 20;
+  --unifique-z-header: 50;
+  --unifique-z-modal: 100;
+  --unifique-z-toast: 200;
+
+  /* Transições documentadas */
+  --unifique-transition-fast: 0.15s ease;
+  --unifique-transition-base: 0.2s ease;
+  --unifique-transition-modal: 0.18s ease-out;
+  --unifique-toast-fade: 0.2s ease;
+
+  /* Anel de foco documentado para inputs */
+  --unifique-focus-ring: 0 0 0 3px rgba(33, 36, 146, 0.12);
+}

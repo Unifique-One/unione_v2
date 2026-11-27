@@ -1,0 +1,94 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * tokens/colors.css
+ *
+ * Fonte única: /opt/unione/pt/unione.md ("Cores Institucionais Oficiais",
+ * "Cores de Destaque & Energia", "Neutros & Superfícies" e "Tokens Semânticos").
+ * Nenhuma cor fora dessa lista foi introduzida. Não substituir valores.
+ */
+
+:root {
+  /* ---------------------------------------------------------------------------
+   * Azuis institucionais
+   * ------------------------------------------------------------------------ */
+  --unifique-royal: #212492;       /* Azul Royal Oficial da marca Unifique */
+  --unifique-royal-dark: #161869;  /* Azul Marinho Profundo (hover / active) */
+  --unifique-royal-light: #3539B8; /* Azul Royal Vibrante */
+
+  --unifique-primary: #212492;
+  --unifique-primary-dark: #161869;
+  --unifique-primary-light: #00AEEF;
+
+  /* ---------------------------------------------------------------------------
+   * Cores de destaque e energia
+   * ------------------------------------------------------------------------ */
+  --unifique-yellow: #F5EC5A;        /* Amarelo Energia Oficial (CTAs e destaques) */
+  --unifique-yellow-bright: #FFD500; /* Amarelo Vivo (hover / acento) */
+  --unifique-cyan: #00AEEF;          /* Ciano Conectividade */
+  --unifique-magenta: #E6007E;       /* Magenta */
+  --unifique-green: #45B649;         /* Verde Segurança */
+  --unifique-purple: #743BBD;        /* Roxo Talk/Meet */
+
+  /* ---------------------------------------------------------------------------
+   * Neutros e superfícies (lista completa do documento oficial)
+   * ------------------------------------------------------------------------ */
+  --unifique-white: #FFFFFF;
+  --unifique-black: #111111;
+  --unifique-gray-50: #F6F8FC;
+  --unifique-gray-100: #EEF2F9;
+  --unifique-gray-200: #DCE3F0;
+  --unifique-gray-300: #C2CCE0;
+  --unifique-gray-500: #5E6882;
+  --unifique-gray-700: #2A324B;
+  --unifique-gray-900: #0F1429;
+
+  /* ---------------------------------------------------------------------------
+   * Tokens semânticos oficiais
+   * ------------------------------------------------------------------------ */
+  --unifique-background: var(--unifique-white);
+  --unifique-surface: var(--unifique-gray-50);
+  --unifique-text: var(--unifique-gray-900);
+  --unifique-text-muted: var(--unifique-gray-500);
+  --unifique-border: var(--unifique-gray-200);
+
+  /* ---------------------------------------------------------------------------
+   * Gradiente do cabeçalho
+   * O documento original usa dois tons intermediários no gradiente do .nc-header.
+   * Para manter a regra "somente tokens oficiais", o gradiente é composto apenas
+   * pelos três azuis institucionais documentados, sem introduzir novas cores.
+   * ------------------------------------------------------------------------ */
+  --unifique-header-gradient: linear-gradient(
+    90deg,
+    var(--unifique-royal-dark) 0%,
+    var(--unifique-royal) 55%,
+    var(--unifique-royal-light) 100%
+  );
+
+  /* ---------------------------------------------------------------------------
+   * Transparências derivadas das cores oficiais (usadas em components.css)
+   * Os valores abaixo são apenas as mesmas cores oficiais com alpha.
+   * ------------------------------------------------------------------------ */
+  --unifique-royal-alpha-04: rgba(33, 36, 146, 0.04);
+  --unifique-royal-alpha-08: rgba(33, 36, 146, 0.08);
+  --unifique-royal-alpha-10: rgba(33, 36, 146, 0.10);
+  --unifique-royal-alpha-12: rgba(33, 36, 146, 0.12);
+  --unifique-royal-alpha-22: rgba(33, 36, 146, 0.22);
+  --unifique-cyan-alpha-14: rgba(0, 174, 239, 0.14);
+  --unifique-green-alpha-15: rgba(69, 182, 73, 0.15);
+  --unifique-yellow-alpha-45: rgba(245, 236, 90, 0.45);
+  --unifique-yellow-alpha-35: rgba(245, 236, 90, 0.35);
+  --unifique-yellow-alpha-50: rgba(245, 236, 90, 0.5);
+  --unifique-yellow-alpha-40: rgba(245, 236, 90, 0.4);
+  --unifique-magenta-alpha-12: rgba(230, 0, 126, 0.12);
+  --unifique-white-alpha-08: rgba(255, 255, 255, 0.08);
+  --unifique-white-alpha-14: rgba(255, 255, 255, 0.14);
+  --unifique-white-alpha-18: rgba(255, 255, 255, 0.18);
+  --unifique-white-alpha-24: rgba(255, 255, 255, 0.24);
+  --unifique-white-alpha-25: rgba(255, 255, 255, 0.25);
+  --unifique-white-alpha-72: rgba(255, 255, 255, 0.72);
+  --unifique-white-alpha-82: rgba(255, 255, 255, 0.82);
+  --unifique-white-alpha-88: rgba(255, 255, 255, 0.88);
+  --unifique-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --unifique-gray900-alpha-60: rgba(15, 20, 41, 0.6); /* backdrop de modal */
+  --unifique-royaldark-alpha-55: rgba(22, 24, 105, 0.55); /* campo de busca no header */
+}

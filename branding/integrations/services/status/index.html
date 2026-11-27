@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UNIFIQUE ONE — Status dos serviços</title>
+  <link rel="icon" href="/favicon-32x32-01e518e661.png" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon-c435f4f4da.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --royal: #212492;
+      --royal-dark: #161869;
+      --yellow: #F5EC5A;
+      --cyan: #00AEEF;
+      --green: #45B649;
+      --gray-50: #F6F8FC;
+      --gray-100: #EEF2F9;
+      --gray-200: #DCE3F0;
+      --gray-500: #5E6882;
+      --gray-900: #0F1429;
+      --radius: 16px;
+      --pill: 9999px;
+      --shadow: 0 6px 18px rgba(33, 36, 146, 0.10);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+      padding: 32px 20px;
+    }
+    header {
+      max-width: 860px;
+      margin: 0 auto 24px;
+      background: linear-gradient(90deg, var(--royal-dark) 0%, var(--royal) 55%, #3539B8 100%);
+      border-bottom: 3px solid var(--yellow);
+      border-radius: var(--radius);
+      color: #fff;
+      padding: 24px 28px;
+      box-shadow: var(--shadow);
+    }
+    .brand {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--royal-dark);
+      border-radius: var(--pill);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      text-transform: uppercase;
+      margin-left: 8px;
+    }
+    .subtitle { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+    main { max-width: 860px; margin: 0 auto; display: grid; gap: 14px; }
+    .service {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-top: 4px solid var(--royal);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+    }
+    .name { font-family: "Plus Jakarta Sans", sans-serif; font-weight: 700; font-size: 15px; }
+    .host { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+    .ok {
+      background: rgba(69, 182, 73, 0.15);
+      color: #166534;
+      border-radius: var(--pill);
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    footer { max-width: 860px; margin: 22px auto 0; font-size: 12px; color: var(--gray-500); text-align: center; }
+    a { color: var(--royal); font-weight: 700; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">unifique<span class="badge">ONE</span></div>
+    <div class="subtitle">Status dos serviços · plataforma corporativa unificada</div>
+  </header>
+  <main>
+    <div class="service"><div><div class="name">Portal</div><div class="host">cloud.csphere.cloud</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">Arquivos</div><div class="host">drive.csphere.cloud · files.csphere.cloud</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">Office</div><div class="host">office.csphere.cloud</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">Talk &amp; Meet</div><div class="host">meet.csphere.cloud</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">Agenda, Contatos e Formulários</div><div class="host">calendar · contacts · forms</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">Colaboração</div><div class="host">board · whiteboard · notes · tasks · projects</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">Identidade e API</div><div class="host">id · auth · api</div></div><span class="ok">Operacional</span></div>
+    <div class="service"><div><div class="name">E-mail e IA</div><div class="host">mail · ai</div></div><span class="ok">Operacional</span></div>
+  </main>
+  <footer>UNIFIQUE ONE · <a href="https://cloud.csphere.cloud">Acessar plataforma</a></footer>
+</body>
+</html>

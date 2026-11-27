@@ -1,0 +1,21 @@
+[Unit]
+Description=UNIFIQUE ONE Traefik reverse proxy
+After=network-online.target unione-network.service
+Wants=network-online.target
+
+[Container]
+Image=docker.io/library/traefik:v3.3
+ContainerName=unione-traefik
+Network=unione.network
+NetworkAlias=traefik
+PublishPort=8080:80
+Volume=/opt/unione/stack/traefik.yml:/etc/traefik/traefik.yml:ro
+Volume=/opt/unione/stack/services.yml:/etc/traefik/services.yml:ro
+Volume=/opt/unione/secrets/admin.htpasswd:/etc/traefik/admin.htpasswd:ro
+Exec=/usr/local/bin/traefik --configFile=/etc/traefik/traefik.yml
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

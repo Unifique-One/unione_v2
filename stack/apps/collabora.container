@@ -1,0 +1,17 @@
+[Unit]
+Description=UNIFIQUE ONE Collabora Online
+After=network-online.target unione-network.service nextcloud.service
+
+[Container]
+Image=docker.io/collabora/code:latest
+ContainerName=unione-collabora
+Network=unione.network
+NetworkAlias=collabora
+Environment=domain=cloud\\.csphere\\.cloud|drive\\.csphere\\.cloud
+Environment=extra_params=--o:ssl.enable=false
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

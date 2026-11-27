@@ -1,0 +1,176 @@
+/*
+ * UNIFIQUE ONE — Design System
+ * themes/login.css
+ *
+ * Tela de autenticação. Identidade UNIFIQUE ONE da primeira ao último pixel:
+ * logo oficial claro, royal como fundo, CTA em Amarelo Energia.
+ * Nenhuma referência visual à marca original da tecnologia de autenticação.
+ */
+
+.unifique-login,
+body.login,
+#login.unifique-login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--unifique-space-11);
+  background: var(--unifique-header-gradient);
+  font-family: var(--unifique-font-family);
+  color: var(--unifique-text);
+  -webkit-font-smoothing: var(--unifique-font-smoothing);
+}
+
+.unifique-login::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--unifique-royaldark-alpha-55);
+  pointer-events: none;
+}
+
+.unifique-login__panel,
+#login-main.unifique-login__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: var(--unifique-white);
+  border-radius: var(--unifique-radius-xl);
+  box-shadow: var(--unifique-shadow-lg);
+  border-top: var(--unifique-header-border-width) solid var(--unifique-yellow);
+  padding: var(--unifique-space-13) var(--unifique-space-11);
+  display: flex;
+  flex-direction: column;
+  gap: var(--unifique-space-10);
+}
+
+.unifique-login__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--unifique-space-5);
+  text-align: center;
+}
+
+/* Na tela de login o fundo é escuro: usar a variante light do wordmark oficial */
+.unifique-login__brand img,
+.unifique-login__brand svg {
+  width: var(--unifique-logo-width);
+  height: auto;
+}
+
+.unifique-login__product {
+  font-family: var(--unifique-font-display);
+  font-size: var(--unifique-font-size-xs);
+  font-weight: var(--unifique-font-weight-extrabold);
+  letter-spacing: var(--unifique-letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--unifique-royal);
+}
+
+.unifique-login__title {
+  font-family: var(--unifique-font-display);
+  font-size: var(--unifique-font-size-4xl);
+  font-weight: var(--unifique-font-weight-extrabold);
+  color: var(--unifique-royal-dark);
+  text-align: center;
+}
+
+.unifique-login__subtitle {
+  font-size: var(--unifique-font-size-base);
+  color: var(--unifique-text-muted);
+  text-align: center;
+  line-height: var(--unifique-line-height-body);
+}
+
+.unifique-login__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--unifique-space-7);
+}
+
+.unifique-login__label {
+  display: block;
+  font-size: var(--unifique-font-size-xs);
+  font-weight: var(--unifique-font-weight-bold);
+  color: var(--unifique-royal-dark);
+  margin-bottom: var(--unifique-space-2);
+}
+
+.unifique-login__submit,
+#login-submit.unifique-login__submit {
+  background: var(--unifique-yellow);
+  color: var(--unifique-royal-dark);
+  border: 1px solid var(--unifique-yellow);
+  border-radius: var(--unifique-radius-pill);
+  padding: var(--unifique-space-5) var(--unifique-space-9);
+  font-family: var(--unifique-font-display);
+  font-size: var(--unifique-font-size-base);
+  font-weight: var(--unifique-font-weight-extrabold);
+  cursor: pointer;
+  transition: all var(--unifique-transition-base);
+  box-shadow: 0 3px 10px var(--unifique-yellow-alpha-35);
+  width: 100%;
+}
+
+.unifique-login__submit:hover,
+#login-submit.unifique-login__submit:hover {
+  background: var(--unifique-yellow-bright);
+  border-color: var(--unifique-yellow-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 14px var(--unifique-yellow-alpha-50);
+}
+
+.unifique-login__footer {
+  text-align: center;
+  font-size: var(--unifique-font-size-xs);
+  color: var(--unifique-text-muted);
+  border-top: 1px solid var(--unifique-border);
+  padding-top: var(--unifique-space-7);
+}
+
+.unifique-login__footer strong {
+  color: var(--unifique-royal);
+}
+
+.unifique-login__error {
+  background: var(--unifique-magenta-alpha-12);
+  color: var(--unifique-magenta);
+  border-radius: var(--unifique-radius-md);
+  padding: var(--unifique-space-5);
+  font-size: var(--unifique-font-size-xs);
+  border-left: 4px solid var(--unifique-magenta);
+}
+
+/* Compatibilidade com o seletor de login do Nextcloud */
+#login .unifique-input,
+#login input[type="text"],
+#login input[type="password"] {
+  background: var(--unifique-white);
+  color: var(--unifique-text);
+  border: 1.5px solid var(--unifique-gray-300);
+  border-radius: var(--unifique-radius-pill);
+  padding: var(--unifique-space-4) var(--unifique-space-7);
+  font-family: var(--unifique-font-family);
+  font-size: var(--unifique-font-size-base);
+}
+
+#login input:focus {
+  outline: none;
+  border-color: var(--unifique-royal);
+  box-shadow: var(--unifique-focus-ring);
+}
+
+#login label {
+  color: var(--unifique-royal-dark);
+  font-weight: var(--unifique-font-weight-bold);
+  font-size: var(--unifique-font-size-xs);
+}
+
+/* Avisos legais/técnicos do login: preservar conteúdo, alinhar aparência */
+#login .unifique-login__legal {
+  color: var(--unifique-white-alpha-82);
+  font-size: var(--unifique-font-size-2xs);
+  text-align: center;
+}

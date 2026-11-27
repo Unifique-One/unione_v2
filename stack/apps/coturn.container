@@ -1,0 +1,16 @@
+[Unit]
+Description=UNIFIQUE ONE TURN server
+After=network-online.target unione-network.service
+
+[Container]
+Image=docker.io/coturn/coturn:latest
+ContainerName=unione-coturn
+Network=unione.network
+NetworkAlias=turn
+Volume=/opt/unione/stack/config/coturn.conf:/etc/coturn/turnserver.conf:ro
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=UNIFIQUE ONE Redis
+After=network-online.target unione-network.service
+
+[Container]
+Image=docker.io/library/redis:7-alpine
+ContainerName=unione-redis
+Network=unione.network
+NetworkAlias=redis
+Volume=unione-redis:/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,257 @@
+# UNIFIQUE ONE - dynamic Traefik configuration.
+# All public hostnames are on csphere.cloud. Upstream names are the stable
+# Podman container names on the "unione" network.
+
+http:
+  middlewares:
+    forwarded-https:
+      headers:
+        customRequestHeaders:
+          X-Forwarded-Proto: https
+
+    # Nextcloud app path prefixes
+    prefix-files:
+      addPrefix:
+        prefix: /apps/files
+    prefix-spreed:
+      addPrefix:
+        prefix: /apps/spreed
+    prefix-calendar:
+      addPrefix:
+        prefix: /apps/calendar
+    prefix-contacts:
+      addPrefix:
+        prefix: /apps/contacts
+    prefix-forms:
+      addPrefix:
+        prefix: /apps/forms
+    prefix-deck:
+      addPrefix:
+        prefix: /apps/deck
+    prefix-whiteboard:
+      addPrefix:
+        prefix: /apps/whiteboard
+    prefix-notes:
+      addPrefix:
+        prefix: /apps/notes
+    prefix-tasks:
+      addPrefix:
+        prefix: /apps/tasks
+    prefix-assistant:
+      addPrefix:
+        prefix: /apps/assistant
+    prefix-index:
+      addPrefix:
+        prefix: /index.php
+    prefix-mail:
+      addPrefix:
+        prefix: /apps/mail
+
+    # API rewrites
+    prefix-remote:
+      addPrefix:
+        prefix: /remote.php
+    prefix-remote-dav:
+      addPrefix:
+        prefix: /remote.php/dav
+    ocs-v1-to-v2:
+      replacePathRegex:
+        regex: '^/ocs/v1\.php/(.*)'
+        replacement: /ocs/v2.php/$1
+    ocs-plain-to-v2:
+      replacePathRegex:
+        regex: '^/ocs/(.*)'
+        replacement: /ocs/v2.php/$1
+
+    # admin.csphere.cloud
+    admin-auth:
+      basicAuth:
+        usersFile: /etc/traefik/admin.htpasswd
+        realm: UNIFIQUE ONE Admin
+
+  services:
+    nextcloud:
+      loadBalancer:
+        servers:
+          - url: http://unione-nextcloud:80
+    collabora:
+      loadBalancer:
+        servers:
+          - url: http://unione-collabora:9980
+    status:
+      loadBalancer:
+        servers:
+          - url: http://unione-status:80
+
+  routers:
+    cloud:
+      rule: 'Host(`cloud.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https]
+
+    drive:
+      rule: 'Host(`drive.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-files]
+
+    files:
+      rule: 'Host(`files.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-files]
+
+    office:
+      rule: 'Host(`office.csphere.cloud`)'
+      entryPoints: [web]
+      service: collabora
+      middlewares: [forwarded-https]
+
+    meet:
+      rule: 'Host(`meet.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-spreed]
+
+    calendar:
+      rule: 'Host(`calendar.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-calendar]
+
+    contacts:
+      rule: 'Host(`contacts.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-contacts]
+
+    forms:
+      rule: 'Host(`forms.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-forms]
+
+    board:
+      rule: 'Host(`board.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-deck]
+
+    whiteboard:
+      rule: 'Host(`whiteboard.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-whiteboard]
+
+    notes:
+      rule: 'Host(`notes.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-notes]
+
+    tasks:
+      rule: 'Host(`tasks.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-tasks]
+
+    projects:
+      rule: 'Host(`projects.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-deck]
+
+    ai:
+      # AI runtime deferred: this host serves the Nextcloud Assistant only.
+      rule: 'Host(`ai.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-assistant]
+
+    id:
+      rule: 'Host(`id.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https]
+
+    auth:
+      rule: 'Host(`auth.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-index]
+
+    mail:
+      rule: 'Host(`mail.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-mail]
+
+    status:
+      rule: 'Host(`status.csphere.cloud`)'
+      entryPoints: [web]
+      service: status
+      middlewares: [forwarded-https]
+
+    admin:
+      rule: 'Host(`admin.csphere.cloud`)'
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, admin-auth]
+
+    # api.csphere.cloud - several routers with explicit priorities so that the
+    # specific OCS/DAV paths win over the catch-all remote.php rewrite.
+    api-ocs-v2:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/ocs/v2.php`)'
+      priority: 100
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https]
+    api-ocs-v1:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/ocs/v1.php`)'
+      priority: 99
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, ocs-v1-to-v2]
+    api-ocs:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/ocs/`)'
+      priority: 98
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, ocs-plain-to-v2]
+    api-remote:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/remote.php`)'
+      priority: 97
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https]
+    api-dav:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/dav`)'
+      priority: 96
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-remote]
+    api-webdav:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/webdav`)'
+      priority: 95
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-remote]
+    api-caldav:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/caldav`)'
+      priority: 94
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-remote-dav]
+    api-carddav:
+      rule: 'Host(`api.csphere.cloud`) && PathPrefix(`/carddav`)'
+      priority: 93
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-remote-dav]
+    api-default:
+      rule: 'Host(`api.csphere.cloud`)'
+      priority: 1
+      entryPoints: [web]
+      service: nextcloud
+      middlewares: [forwarded-https, prefix-remote]
