@@ -26,6 +26,17 @@ mesmo `unione.md` (pílula amarela `#F5EC5A`, texto `#161869`, Plus Jakarta Sans
 | --- | --- | --- |
 | `unifique-one-light.svg` | Cabeçalho escuro, login, toast, sobreposições sobre royal/marinho | `#FFFFFF` |
 | `unifique-one-royal.svg` | Fundos claros: sidebar, painéis, documentos, e-mails | `#212492` |
+| `unione-official-blue.jpeg` | Logo padrão do theming (`logo`) e superfícies claras | símbolo amarelo sobre fundo royal `#212492` |
+| `unione-official-white.jpeg` | Logo do cabeçalho (`logoheader`) e superfícies escuras | símbolo azul/amarelo sobre fundo branco |
+
+## Logos oficiais recebidos do proprietário da marca (2026-11-27)
+
+`unione-official-blue.jpeg` e `unione-official-white.jpeg` são cópias byte a byte de
+`unione_blue.jpeg` e `unione_white.jpeg`, respectivamente (1024x1024, JPEG). São
+as duas variantes canônicas do símbolo UNIFIQUE ONE usadas no tema: azul em
+fundos claros e branca no cabeçalho sempre escuro e nos fundos escuros. O tema
+serve cópias locais em `../nextcloud-theme/unifique/core/img/` para que ambas
+sejam da mesma origem (`img-src 'self'`) e nenhum pedido externo seja feito.
 
 ## Regras de uso
 

@@ -22,7 +22,12 @@ CUSTOM_THEME_CSS_DIR="/var/www/html/custom_apps/unifique-theme/css"
 NAME="UNIFIQUE ONE"
 PRODUCT_NAME="UNIFIQUE ONE"
 SLOGAN=""
-LOGO="${BRANDING_MOUNT}/assets/logos/unifique-one-light.svg"
+# Official UNIFIQUE ONE artwork supplied by the brand owner (1024x1024 JPEG).
+# The blue variant is the default logo (light surfaces, app navigation); the
+# white variant is the header logo (the branded header is always dark blue) and
+# is also selected by the theme CSS for dark surfaces.
+LOGO="${BRANDING_MOUNT}/assets/logos/unione-official-blue.jpeg"
+LOGOHEADER="${BRANDING_MOUNT}/assets/logos/unione-official-white.jpeg"
 FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 BACKGROUND_COLOR="#F6F8FC"
@@ -125,7 +130,7 @@ theming_config_set color "$COLOR"
 theming_config_set background_color "$BACKGROUND_COLOR"
 theming_config_set background backgroundColor
 theming_config_set logo "$LOGO"
-theming_config_set logoheader "$LOGO"
+theming_config_set logoheader "$LOGOHEADER"
 theming_config_set favicon "$FAVICON"
 theming_config_set url 'https://unifique.com.br'
 theming_config_set imprintUrl 'https://unifique.com.br'

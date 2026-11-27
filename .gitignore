@@ -17,3 +17,6 @@ tunnel.env
 /img/
 __pycache__/
 *.pyc
+
+# User-supplied logo uploads; canonical copies live in branding/assets/logos/.
+/unione_*.jpeg

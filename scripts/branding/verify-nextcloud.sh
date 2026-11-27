@@ -9,7 +9,8 @@ BRANDING_MOUNT="/mnt/branding"
 NAME="UNIFIQUE ONE"
 PRODUCT_NAME="UNIFIQUE ONE"
 SLOGAN=""
-LOGO="${BRANDING_MOUNT}/assets/logos/unifique-one-light.svg"
+LOGO="${BRANDING_MOUNT}/assets/logos/unione-official-blue.jpeg"
+LOGOHEADER="${BRANDING_MOUNT}/assets/logos/unione-official-white.jpeg"
 FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 COLOR="#212492"
@@ -104,16 +105,36 @@ check_theming_config primary_color "$COLOR"
 check_theming_config color "$COLOR"
 check_theming_config background_color "$BACKGROUND_COLOR"
 check_theming_config background backgroundColor
-check_theming_config logo 'image/svg+xml'
-check_theming_config logoheader 'image/svg+xml'
+check_theming_config logo 'image/jpeg'
+check_theming_config logoheader 'image/jpeg'
 check_theming_config favicon 'image/vnd.microsoft.icon'
 check_theming productName "$PRODUCT_NAME"
 check_theming icon "$ICON"
 check_theming font "$FONT"
 
 check_asset "$LOGO"
+check_asset "$LOGOHEADER"
 check_asset "$FAVICON"
 check_asset "$ICON"
+
+printf '\nOfficial logo variants (theme served):\n'
+for f in unione-official-blue.jpeg unione-official-white.jpeg; do
+  check_asset "/var/www/html/themes/${THEME_ID}/core/img/$f"
+  if cmp -s "/opt/unione/branding/assets/logos/$f" \
+           "/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/img/$f"; then
+    ok "theme logo matches official source: $f"
+  else
+    bad "theme logo differs from official source: $f"
+  fi
+done
+server_css="/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/css/server.css"
+if grep -q "unione-official-blue.jpeg" "$server_css" && \
+   grep -q "unione-official-white.jpeg" "$server_css" && \
+   grep -q -- '--image-logoheader' "$server_css"; then
+  ok 'theme CSS selects blue/white logo variants and sets the header logo'
+else
+  bad 'theme CSS is missing official logo variant handling'
+fi
 
 printf '\nExternal links and official theme:\n'
 check_theming_config url "$OFFICIAL_URL"
