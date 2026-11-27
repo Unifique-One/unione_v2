@@ -207,6 +207,13 @@ body[data-page='login'],
 	font-family: 'Plus Jakarta Sans', sans-serif !important;
 }
 
+/* Core sets .wrapper { margin-block: 10vh auto } (and margin-top: 0 on small
+   screens), which pins the login block near the top of the viewport. Equal
+   auto margins centre the whole block vertically in the flex body. */
+body#body-login .wrapper {
+	margin: auto !important;
+}
+
 /* The rendered login card is .guest-box.login-box, not #login form. */
 #body-login .guest-box,
 #body-login .login-box,
@@ -228,8 +235,6 @@ body[data-page='login'],
 	box-sizing: border-box !important;
 	width: min(360px, calc(100vw - 32px)) !important;
 	padding: 30px !important;
-	/* Move the card down and give it breathing room from the top accent line. */
-	margin-top: 40px !important;
 }
 
 /* Canonical login headline, centered inside the solid card. */
