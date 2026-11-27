@@ -9,8 +9,8 @@ BRANDING_MOUNT="/mnt/branding"
 NAME="UNIFIQUE ONE"
 PRODUCT_NAME="UNIFIQUE ONE"
 SLOGAN=""
-LOGO="${BRANDING_MOUNT}/assets/logos/unione-official-blue.jpeg"
-LOGOHEADER="${BRANDING_MOUNT}/assets/logos/unione-official-white.jpeg"
+LOGO="${BRANDING_MOUNT}/assets/logos/unione-symbol-dark.png"
+LOGOHEADER="${BRANDING_MOUNT}/assets/logos/unione-symbol-light.png"
 FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 COLOR="#212492"
@@ -105,8 +105,8 @@ check_theming_config primary_color "$COLOR"
 check_theming_config color "$COLOR"
 check_theming_config background_color "$BACKGROUND_COLOR"
 check_theming_config background backgroundColor
-check_theming_config logo 'image/jpeg'
-check_theming_config logoheader 'image/jpeg'
+check_theming_config logo 'image/png'
+check_theming_config logoheader 'image/png'
 check_theming_config favicon 'image/vnd.microsoft.icon'
 check_theming productName "$PRODUCT_NAME"
 check_theming icon "$ICON"
@@ -118,7 +118,7 @@ check_asset "$FAVICON"
 check_asset "$ICON"
 
 printf '\nOfficial logo variants (theme served):\n'
-for f in unione-official-blue.jpeg unione-official-white.jpeg; do
+for f in unione-symbol-dark.png unione-symbol-light.png; do
   check_asset "/var/www/html/themes/${THEME_ID}/core/img/$f"
   if cmp -s "/opt/unione/branding/assets/logos/$f" \
            "/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/img/$f"; then
@@ -128,10 +128,10 @@ for f in unione-official-blue.jpeg unione-official-white.jpeg; do
   fi
 done
 server_css="/opt/unione/branding/nextcloud-theme/${THEME_ID}/core/css/server.css"
-if grep -q "unione-official-blue.jpeg" "$server_css" && \
-   grep -q "unione-official-white.jpeg" "$server_css" && \
+if grep -q 'unione-symbol-dark.png' "$server_css" && \
+   grep -q 'unione-symbol-light.png' "$server_css" && \
    grep -q -- '--image-logoheader' "$server_css"; then
-  ok 'theme CSS selects blue/white logo variants and sets the header logo'
+  ok 'theme CSS selects transparent dark/light logo variants and sets the header logo'
 else
   bad 'theme CSS is missing official logo variant handling'
 fi

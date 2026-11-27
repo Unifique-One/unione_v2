@@ -157,25 +157,24 @@ html:root body[data-themes*='dark'] {
 
 /* ==========================================================================
    2a. Official UNIFIQUE ONE logo variants
-   The theming app stores a single image per key. Both official JPEGs are
-   served locally by this theme so the right variant can be selected per
-   surface without third-party requests: blue artwork on light surfaces,
-   white artwork on dark ones. The branded header is always dark blue, so it
-   always uses the white artwork. No logo is rendered above the login card.
+   The supplied JPEGs have solid square backgrounds, so the theme serves
+   background-free PNG cuts instead: dark symbol on light surfaces, light
+   symbol on the always-blue header and on dark surfaces. No square plate is
+   rendered anywhere and no logo is rendered above the login card.
    ========================================================================== */
 html:root {
-	--image-logo: url('/themes/unifique/core/img/unione-official-blue.jpeg') !important;
-	--image-logoheader: url('/themes/unifique/core/img/unione-official-white.jpeg') !important;
+	--image-logo: url('/themes/unifique/core/img/unione-symbol-dark.png') !important;
+	--image-logoheader: url('/themes/unifique/core/img/unione-symbol-light.png') !important;
 }
 
 html:root body[data-theme-dark],
 html:root body[data-theme-dark-highcontrast] {
-	--image-logo: url('/themes/unifique/core/img/unione-official-white.jpeg') !important;
+	--image-logo: url('/themes/unifique/core/img/unione-symbol-light.png') !important;
 }
 
 @media (prefers-color-scheme: dark) {
 	html:root body:not([data-theme-light]):not([data-theme-default]) {
-		--image-logo: url('/themes/unifique/core/img/unione-official-white.jpeg') !important;
+		--image-logo: url('/themes/unifique/core/img/unione-symbol-light.png') !important;
 	}
 }
 

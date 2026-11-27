@@ -22,12 +22,12 @@ CUSTOM_THEME_CSS_DIR="/var/www/html/custom_apps/unifique-theme/css"
 NAME="UNIFIQUE ONE"
 PRODUCT_NAME="UNIFIQUE ONE"
 SLOGAN=""
-# Official UNIFIQUE ONE artwork supplied by the brand owner (1024x1024 JPEG).
-# The blue variant is the default logo (light surfaces, app navigation); the
-# white variant is the header logo (the branded header is always dark blue) and
-# is also selected by the theme CSS for dark surfaces.
-LOGO="${BRANDING_MOUNT}/assets/logos/unione-official-blue.jpeg"
-LOGOHEADER="${BRANDING_MOUNT}/assets/logos/unione-official-white.jpeg"
+# Official UNIFIQUE ONE symbol supplied by the brand owner as two 1024x1024
+# JPEGs with solid backgrounds. The theme serves background-free PNG cuts:
+# the dark symbol on light surfaces, the light symbol on the always-blue header
+# and on dark surfaces. No square background is rendered anywhere.
+LOGO="${BRANDING_MOUNT}/assets/logos/unione-symbol-dark.png"
+LOGOHEADER="${BRANDING_MOUNT}/assets/logos/unione-symbol-light.png"
 FAVICON="${BRANDING_MOUNT}/assets/favicons/favicon-cd754f5597.ico"
 ICON="${BRANDING_MOUNT}/assets/favicons/apple-touch-icon-c435f4f4da.png"
 BACKGROUND_COLOR="#F6F8FC"

@@ -26,16 +26,21 @@ mesmo `unione.md` (pílula amarela `#F5EC5A`, texto `#161869`, Plus Jakarta Sans
 | --- | --- | --- |
 | `unifique-one-light.svg` | Cabeçalho escuro, login, toast, sobreposições sobre royal/marinho | `#FFFFFF` |
 | `unifique-one-royal.svg` | Fundos claros: sidebar, painéis, documentos, e-mails | `#212492` |
-| `unione-official-blue.jpeg` | Logo padrão do theming (`logo`) e superfícies claras | símbolo amarelo sobre fundo royal `#212492` |
-| `unione-official-white.jpeg` | Logo do cabeçalho (`logoheader`) e superfícies escuras | símbolo azul/amarelo sobre fundo branco |
+| `unione-symbol-dark.png` | Logo padrão do theming (`logo`) e superfícies claras | símbolo escuro (azul/ciano/amarelo) sobre transparência |
+| `unione-symbol-light.png` | Logo do cabeçalho (`logoheader`) e superfícies escuras | símbolo claro (branco/ciano/amarelo) sobre transparência |
+| `unione-official-blue.jpeg` | Fonte original recebida do proprietário da marca | fundo azul marinho sólido (não é servido) |
+| `unione-official-white.jpeg` | Fonte original recebida do proprietário da marca | fundo branco sólido (não é servido) |
 
 ## Logos oficiais recebidos do proprietário da marca (2026-11-27)
 
 `unione-official-blue.jpeg` e `unione-official-white.jpeg` são cópias byte a byte de
-`unione_blue.jpeg` e `unione_white.jpeg`, respectivamente (1024x1024, JPEG). São
-as duas variantes canônicas do símbolo UNIFIQUE ONE usadas no tema: azul em
-fundos claros e branca no cabeçalho sempre escuro e nos fundos escuros. O tema
-serve cópias locais em `../nextcloud-theme/unifique/core/img/` para que ambas
+`unione_blue.jpeg` e `unione_white.jpeg` (1024x1024, JPEG). Ambos têm **fundo sólido
+quadrado**, o que produzia uma placa quadrada sobre o cabeçalho azul. Por isso o
+tema não os serve diretamente: `unione-symbol-light.png` é o recorte do JPEG azul
+(fundo marinho removido) e `unione-symbol-dark.png` é o recorte do JPEG branco
+(fundo branco removido). As cores do símbolo não foram alteradas — apenas o fundo
+foi tornado transparente — e o resultado não é mais quadrado (706x550 e 705x550).
+O tema serve as cópias em `../nextcloud-theme/unifique/core/img/` para que ambas
 sejam da mesma origem (`img-src 'self'`) e nenhum pedido externo seja feito.
 
 ## Regras de uso
