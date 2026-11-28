@@ -9,6 +9,11 @@ Network=unione.network
 NetworkAlias=collabora
 Environment=domain=cloud\\.csphere\\.cloud|drive\\.csphere\\.cloud
 Environment=extra_params=--o:ssl.enable=false
+Mount=Type=bind,Source=/opt/unione/stack/config/collabora/coolwsd.xml,Destination=/etc/coolwsd/coolwsd.xml,ReadOnly=true
+Mount=Type=bind,Source=/opt/unione/stack/config/collabora/branding.js,Destination=/usr/share/coolwsd/browser/dist/branding.js,ReadOnly=true
+Mount=Type=bind,Source=/opt/unione/stack/config/collabora/branding.css,Destination=/usr/share/coolwsd/browser/dist/branding.css,ReadOnly=true
+Mount=Type=bind,Source=/opt/unione/stack/config/collabora/unione-symbol-light.png,Destination=/usr/share/coolwsd/browser/dist/images/unione-symbol-light.png,ReadOnly=true
+Mount=Type=bind,Source=/opt/unione/stack/config/collabora/unione-symbol-dark.png,Destination=/usr/share/coolwsd/browser/dist/images/unione-symbol-dark.png,ReadOnly=true
 
 [Service]
 Restart=always

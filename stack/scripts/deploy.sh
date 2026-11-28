@@ -14,6 +14,7 @@ ADMIN_HTPASSWD="/opt/unione/secrets/admin.htpasswd"
 BRANDING_DIR="/opt/unione/branding"
 THEME_DIR="$BRANDING_DIR/nextcloud-theme/unifique"
 APP_DIR="$BRANDING_DIR/nextcloud-apps/unifique_branding"
+COLLABORA_DIR="$STACK_DIR/config/collabora"
 STATUS_DIR="$BRANDING_DIR/integrations/services/status"
 COTURN_ENV="$STACK_DIR/env/coturn.env"
 COTURN_CONF="$STACK_DIR/config/coturn.conf"
@@ -107,6 +108,11 @@ run_container unione-collabora \
 	--network-alias collabora \
 	-e 'domain=cloud\.csphere\.cloud|drive\.csphere\.cloud' \
 	-e 'extra_params=--o:ssl.enable=false' \
+	-v "$COLLABORA_DIR/coolwsd.xml:/etc/coolwsd/coolwsd.xml:ro,Z" \
+	-v "$COLLABORA_DIR/branding.js:/usr/share/coolwsd/browser/dist/branding.js:ro,Z" \
+	-v "$COLLABORA_DIR/branding.css:/usr/share/coolwsd/browser/dist/branding.css:ro,Z" \
+	-v "$COLLABORA_DIR/unione-symbol-light.png:/usr/share/coolwsd/browser/dist/images/unione-symbol-light.png:ro,Z" \
+	-v "$COLLABORA_DIR/unione-symbol-dark.png:/usr/share/coolwsd/browser/dist/images/unione-symbol-dark.png:ro,Z" \
 	collabora/code:latest
 
 run_container unione-coturn \

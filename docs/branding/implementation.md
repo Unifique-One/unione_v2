@@ -128,3 +128,40 @@ Two read-only extension directories are mounted into `unione-nextcloud`; no core
 The profile/account popup is treated as a surface, not as header chrome: the blue header keeps white text, while the popup inverts to dark text on `#FFFFFF` in light mode (`#0F1429` on white = 18.22:1, Denim `#1067CE` links = 5.45:1) and white text on `#2A324B` in dark mode (`#FFFFFF` on `#2A324B` = 12.68:1, cyan `#00AEEF` links = 5.01:1). Header white text over the navy/royal/Denim gradient is 15.34:1, 12.12:1 and 5.45:1 respectively. All pass WCAG AA.
 
 The login card headline is forced to the canonical `UNIFIQUE ONE` (the Vue prefix `Faça login em` is removed) and centered by `guest.css`. The theming slogan and theme fallback are empty. No logo is rendered above the login card: the legacy `<div id="header" class="header-guest"><div class="logo"></div></div>` is hidden by `guest.css`. In the authenticated UI the theming app stores the transparent dark symbol as `logo` and the transparent light symbol as `logoheader`; the theme serves both locally and sets `--image-logo` to the dark symbol on light surfaces and the light symbol on dark surfaces, while the always-blue branded header uses the light symbol. Neither artwork has a square background. The guest footer has no card and no description or license text; it renders only four official icons — WhatsApp, Telegram, E-mail and Área do Cliente — as byte-identical copies of the assets published by `unifique.com.br`, pointing to that site's exact redirects (`api.whatsapp.com/send?...`, `t.me/UnifiqueOficialBot`, `email2.unifique.com.br`, `servicos.unifique.com.br`). The icons are served from `/themes/unifique/core/img/` so the login CSP (`img-src 'self'`) allows them, and they get a white chip in dark mode for legibility. They render as 24 px icons in 36 px chips with 12 px spacing; the login block is centred in the viewport with extra space below its top accent line. Calendar free/busy requires the organizer address to match the account's registered email; the apply script therefore persists `unione@csphere.cloud` as that user's email. A direct POST to the scheduling outbox now returns HTTP 200 with `2.0;Success`, so new-event creation no longer shows `Falha ao buscar dados de livre/ocupado`.
+
+## 11. Editor de documentos (Collabora) e SSO/SAML (2026-11-27)
+
+O app `office` 1.0.0 incluído no Nextcloud 34 é apenas uma visão geral; ele **não** abre documentos. O editor real é o app `richdocuments` 11.1.3, instalado e habilitado por `scripts/apps/apply-office-sso.sh`:
+
+- `wopi_url = http://collabora:9980` (alias interno da rede `unione`).
+- `public_wopi_url = https://office.csphere.cloud` (host público do navegador).
+- `wopi_callback_url = https://cloud.csphere.cloud` (host canônico para o callback do WOPI).
+- `/hosting/discovery` do Collabora responde; nenhuma imagem ou código do core do Nextcloud foi alterado.
+
+O branding do editor é aplicado por montagens **read-only** em `unione-collabora`, arquivos em `stack/config/collabora/`:
+
+- `coolwsd.xml`: `user_interface.brandProductName = UNIFIQUE ONE`, `brandProductURL = https://unifique.com.br`, `logoURL` apontando para o símbolo transparente servido localmente, e `help_url = https://unifique.com.br`.
+- `branding.js` e `branding.css`: substituem o nome/link do produto upstream e os logos do editor. Os recortes PNG transparentes (`unione-symbol-light.png` / `unione-symbol-dark.png`) são os mesmos do tema; não há fundo quadrado. Os avisos legais e o crédito tecnológico do dialog “Sobre” são preservados.
+- `stack/scripts/deploy.sh` e `stack/apps/collabora.container` registram as montagens para que um redeploy não perca o branding.
+
+O app `user_saml` 8.5.0 está **instalado, mas desativado**: o proprietário ainda não forneceu a URL de metadata do IdP. Quando ela existir, `SAML_METADATA_URL=<url> bash scripts/apps/apply-office-sso.sh` importa `entityID`, URL de SSO e certificado X.509, usa `id.csphere.cloud` como entity ID do SP (`auth.csphere.cloud` é alias) e habilita o app. `scripts/apps/verify-office.sh` valida todo esse estado; hoje termina com `Result: PASS` e SAML marcado como pendente.
+
+### Hostnames acessíveis em `csphere.cloud`
+
+Todos os 20 CNAMEs publicados apontam para o túnel e passam pelo Traefik; `cloud.csphere.cloud` é o host canônico. Os demais são atalhos ou superfícies específicas do mesmo produto:
+
+| Host | Acesso |
+| --- | --- |
+| `cloud` | Aplicação completa UNIFIQUE ONE (canônico) |
+| `drive`, `files` | Atalho direto para Arquivos |
+| `office` | Servidor Collabora (WOPI); abra documentos pelo Files/Office |
+| `meet` | Atalho para Conversas/Talk |
+| `calendar`, `contacts`, `forms` | Atalhos para Agenda, Contatos e Formulários |
+| `board`, `whiteboard`, `projects` | Atalhos para Deck/Whiteboard (projects = visão Deck) |
+| `notes`, `tasks` | Atalhos para Notas e Tarefas |
+| `ai` | Interface do Assistant (sem backend Ollama) |
+| `id`, `auth` | Entrada de login/identidade; `auth` usa `/index.php` |
+| `mail` | Interface de e-mail do Nextcloud (aguardando credenciais IMAP/SMTP de `mail.csphere.cloud`) |
+| `api` | Superfícies OCS/WebDAV/CalDAV/CardDAV (sem página inicial) |
+| `status` | Página pública de status do serviço |
+| `admin` | Administração do Nextcloud, protegida por basic auth no Traefik |
