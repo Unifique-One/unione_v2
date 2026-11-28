@@ -203,10 +203,21 @@ if grep -q '#header.header-guest' "$guest_css" && grep -q 'display: none !import
 else
   bad 'guest header logo is not hidden by guest.css'
 fi
+if grep -q '[.]v-align > header' "$guest_css" && grep -q 'display: none !important' "$guest_css"; then
+  ok 'outer empty guest header (1px line) is hidden above the card'
+else
+  bad 'outer guest header line is not hidden by guest.css'
+fi
+if grep -q 'guest-box::before' "$guest_css"; then
+  bad 'login card still has a decorative top line'
+else
+  ok 'login card has no decorative top line'
+fi
 
 branding_js='/opt/unione/branding/nextcloud-apps/unifique_branding/js/branding.js'
-if grep -q 'removeGuestHeader' "$branding_js" && grep -q 'cleanFooter' "$branding_js" && \
-   grep -q 'api.whatsapp.com' "$branding_js" && grep -q 'email2.unifique.com.br' "$branding_js"; then
+if grep -q 'removeGuestHeader' "$branding_js" && grep -q 'parent.nodeName === .HEADER.' "$branding_js" && \
+   grep -q 'cleanFooter' "$branding_js" && grep -q 'api.whatsapp.com' "$branding_js" && \
+   grep -q 'email2.unifique.com.br' "$branding_js"; then
   ok 'branding script removes guest header, preserves contact links and strips footer copy'
 else
   bad 'branding script is missing header/contact/footer handling'

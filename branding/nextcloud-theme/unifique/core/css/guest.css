@@ -297,7 +297,13 @@ footer.guest-box .info,
 	display: none !important;
 }
 
-#body-login header:has(> #header.header-guest) {
+/* The branding extension removes the inner #header node, so a :has() selector
+   would stop matching. Hide the empty outer <header> directly: on the login
+   page it is the 1px gradient/border strip above the centred card. */
+#body-login .v-align > header,
+body.login .v-align > header,
+body[data-page='login'] .v-align > header,
+.login-page .v-align > header {
 	display: none !important;
 }
 

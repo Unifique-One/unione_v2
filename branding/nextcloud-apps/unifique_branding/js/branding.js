@@ -164,8 +164,15 @@
 		}
 		var nodes = root.querySelectorAll(GUEST_HEADER_SELECTOR);
 		for (var i = 0; i < nodes.length; i++) {
-			if (nodes[i].parentNode) {
-				nodes[i].parentNode.removeChild(nodes[i]);
+			var parent = nodes[i].parentNode;
+			if (!parent) {
+				continue;
+			}
+			parent.removeChild(nodes[i]);
+			// Removing only #header leaves an empty <header> with a 1px border
+			// that renders as a horizontal line above the login card.
+			if (parent.nodeName === 'HEADER' && !parent.children.length && parent.parentNode) {
+				parent.parentNode.removeChild(parent);
 			}
 		}
 	}
