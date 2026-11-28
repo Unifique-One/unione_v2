@@ -248,16 +248,6 @@ body#body-login .wrapper {
 	color: var(--unifique-card-text) !important;
 }
 
-#body-login .guest-box::before,
-#login .guest-box::before {
-	content: '' !important;
-	display: block !important;
-	height: 4px !important;
-	margin: -18px -18px 32px !important;
-	border-radius: 14px 14px 0 0 !important;
-	background: linear-gradient(90deg, #F5EC5A 0%, #00AEEF 55%, #1067CE 100%) !important;
-}
-
 /* The inner Vue form inherits the card surface instead of adding a second box. */
 #login form.login-form {
 	background: transparent !important;
